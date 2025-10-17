@@ -5,133 +5,176 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Birthday Carousel</title>
 
-  <!-- Glide CSS (from CDN) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.2.0/css/glide.core.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.2.0/css/glide.theme.min.css">
+  <!-- Swiper CSS (CDN) -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
 
   <style>
-    /* 🎨 ==== THEME COLORS ==== */
-    :root {
-      --bg: #000000;       /* page background */
-      --card: #ffffff;     /* slide background */
-      --accent: #f96d3e;   /* button color */
-      --text: #2b2b2b;     /* text color */
-      --shadow: rgba(0, 0, 0, 0.1);
+    /* ===== Theme ===== */
+    :root{
+      --page-bg:#0f1116;      /* dark background */
+      --card-bg:#171a22;      /* slide background */
+      --card-border:#7f8596;  /* subtle border */
+      --text:#e7e9ef;         /* text color */
+      --accent:#c4c9d6;       /* arrows/pagination */
     }
 
-    html, body {
-      margin: 0;
-      padding: 0;
-      background: var(--bg);
-      font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      color: var(--text);
+    html,body{
+      margin:0;
+      height:100%;
+      background:var(--page-bg);
+      color:var(--text);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
     }
 
-    .wrap {
-      max-width: 780px;
-      margin: 20px auto 40px;
+    .wrap{
+      max-width:1100px;
+      margin: 24px auto 40px;
       padding: 0 16px;
-      text-align: center;
     }
 
-    /* 🎠 ==== SLIDES ==== */
-    .glide__slide {
-      background: var(--card);
-      border-radius: 18px;
-      padding: 30px 24px;
-      box-shadow: 0 6px 16px var(--shadow);
-      font-size: 18px;
+    /* ===== Swiper sizing ===== */
+    .swiper{
+      width:100%;
+      padding-top: 40px;   /* room for 3D effect */
+      padding-bottom: 60px;
+    }
+
+    /* Each slide gets a fixed width for coverflow; adjust to taste */
+    .swiper-slide{
+      background:var(--card-bg);
+      width: 280px;             /* visible card width */
+      height: 280px;            /* card height */
+      border-radius: 16px;
+      border: 2px solid rgba(127,133,150,0.5);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding: 22px;
       line-height: 1.6;
-      margin: 8px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      font-size: 18px;
+      transition: border-color .2s ease;
+    }
+    .swiper-slide:hover{
+      border-color: var(--card-border);
     }
 
-    .glide__slide:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    /* Message text */
+    .msg{
+      max-width: 88%;
+      margin: 0 auto;
+      user-select: none;
     }
 
-    /* 🔘 Controls */
-    [data-glide-el="controls"] {
-      margin-top: 10px;
-    }
-
-    [data-glide-el="controls"] button {
-      cursor: pointer;
-      margin: 6px;
-      padding: 10px 18px;
+    /* Arrows & pagination */
+    .swiper-button-prev,
+    .swiper-button-next{
+      color: var(--accent);
+      width: 44px; height: 44px;
+      background: rgba(255,255,255,0.08);
       border-radius: 999px;
-      border: none;
+      backdrop-filter: blur(2px);
+    }
+    .swiper-button-prev:after,
+    .swiper-button-next:after{ font-size:18px; }
+
+    .swiper-pagination-bullet{
       background: var(--accent);
-      color: #fff;
-      font-weight: 600;
-      transition: background 0.2s;
+      opacity: .45;
+    }
+    .swiper-pagination-bullet-active{
+      opacity: 1;
     }
 
-    [data-glide-el="controls"] button:hover {
-      background: #e85b2c;
-    }
-
-    /* 🧱 Responsive */
-    @media (max-width: 600px) {
-      .glide__slide {
-        font-size: 16px;
-        padding: 20px;
+    @media (max-width: 520px){
+      .swiper-slide{
+        width: 240px;
+        height: 240px;
+        font-size:16px;
+        padding:18px;
       }
     }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <div class="glide">
-      <div class="glide__track" data-glide-el="track">
-        <ul class="glide__slides" id="slides-container">
-          <!-- Messages load here -->
-        </ul>
-      </div>
+    <!-- Swiper root -->
+    <div class="swiper">
+      <div class="swiper-wrapper" id="slides"><!-- slides injected here --></div>
 
-      <!-- Optional Prev/Next Buttons -->
-      <div data-glide-el="controls">
-        <button data-glide-dir="<">‹ Prev</button>
-        <button data-glide-dir=">">Next ›</button>
-      </div>
+      <!-- Controls (optional) -->
+      <div class="swiper-button-prev" aria-label="Previous slide"></div>
+      <div class="swiper-button-next" aria-label="Next slide"></div>
+      <div class="swiper-pagination"></div>
     </div>
   </div>
 
-  <!-- Glide JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.2.0/glide.min.js"></script>
+  <!-- Swiper JS (CDN) -->
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
   <script>
-    // Load birthday messages dynamically
+    // Load messages from messages.json, then build slides
     fetch('messages.json')
-      .then(response => {
-        if (!response.ok) throw new Error("messages.json not found");
-        return response.json();
+      .then(r => {
+        if (!r.ok) throw new Error('messages.json not found');
+        return r.json();
       })
       .then(messages => {
-        const container = document.getElementById('slides-container');
-        messages.forEach(msg => {
-          const li = document.createElement('li');
-          li.className = 'glide__slide';
-          li.textContent = msg;
-          container.appendChild(li);
+        const wrapper = document.getElementById('slides');
+
+        messages.forEach(text => {
+          const slide = document.createElement('div');
+          slide.className = 'swiper-slide';
+          slide.innerHTML = `<div class="msg">${escapeHtml(text)}</div>`;
+          wrapper.appendChild(slide);
         });
 
-        // Initialize carousel
-        new Glide('.glide', {
-          type: 'carousel',
-          autoplay: 3000,
-          hoverpause: true,
-          animationDuration: 700,
-          perView: 1,
-          gap: 16
-        }).mount();
+        // Init Swiper with coverflow effect
+        new Swiper('.swiper', {
+          effect: 'coverflow',
+          grabCursor: true,
+          centeredSlides: true,
+          slidesPerView: 'auto',
+          loop: true,
+          autoplay: { delay: 3000, disableOnInteraction: false },
+          coverflowEffect: {
+            rotate: 0,      // 0 = flat; try 20 for tilted edges
+            stretch: 0,     // spacing between slides in px
+            depth: 220,     // 3D depth
+            modifier: 1,    // effect multiplier
+            slideShadows: false
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true
+          }
+        });
       })
       .catch(err => {
-        console.error('Error loading messages:', err);
-        const container = document.getElementById('slides-container');
-        container.innerHTML = '<li class="glide__slide">⚠️ Could not load messages.json</li>';
+        console.error(err);
+        const wrapper = document.getElementById('slides');
+        const slide = document.createElement('div');
+        slide.className = 'swiper-slide';
+        slide.textContent = '⚠️ Could not load messages.json';
+        wrapper.appendChild(slide);
       });
+
+    // Tiny HTML escaper to keep messages safe
+    function escapeHtml(str){
+      return String(str)
+        .replaceAll('&','&amp;')
+        .replaceAll('<','&lt;')
+        .replaceAll('>','&gt;')
+        .replaceAll('"','&quot;')
+        .replaceAll("'",'&#39;');
+    }
   </script>
 </body>
 </html>
