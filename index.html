@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Birthday Messages Carousel</title>
+
+  <!-- Glide CSS (from CDN) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.2.0/css/glide.core.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.2.0/css/glide.theme.min.css">
+
+  <style>
+    :root {
+      --bg: #fff8f0;
+      --card: #ffffff;
+      --text: #2b2b2b;
+      --accent: #ff7a59; /* tweak to your brand color */
+    }
+    html, body {
+      margin: 0; padding: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    .wrap {
+      max-width: 780px;
+      margin: 24px auto 40px;
+      padding: 0 16px;
+      text-align: center;
+    }
+    h1 {
+      margin: 0 0 12px;
+      font-size: 24px;
+    }
+    .sub {
+      margin: 0 0 16px;
+      opacity: 0.8;
+      font-size: 14px;
+    }
+
+    /* Card / slide look */
+    .glide__slide {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      font-size: 18px;
+      line-height: 1.5;
+      margin: 8px;
+    }
+    .month {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--accent);
+      letter-spacing: .02em;
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+    .name {
+      font-weight: 700;
+    }
+    .small {
+      font-size: 12px;
+      opacity: .8;
+    }
+
+    /* Controls */
+    [data-glide-el="controls"] button {
+      cursor: pointer;
+      margin: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 0;
+      background: var(--accent);
+      color: white;
+      font-weight: 600;
+    }
+
+    /* Make iframe-friendly: allow page to size nicely */
+    .spacer {
+      height: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>🎉 Birthday Messages</h1>
+    <p class="sub">Auto-rotating greetings you can embed anywhere.</p>
+
+    <div class="glide" aria-label="Birthday messages carousel">
+      <div class="glide__track" data-glide-el="track">
+        <ul class="glide__slides">
+          <!-- You can make each slide either a month with multiple names, or one message per person. -->
+          <!-- EXAMPLE A: One slide per MONTH (with multiple celebrants) -->
+          <li class="glide__slide">
+            <span class="month">October</span>
+            <div>🎂 <span class="name">Lea F.</span> — Oct 18 — Wishing you a fantastic year ahead! 🌟</div>
+            <div>🎉 <span class="name">Sam D.</span> — Oct 22 — Thanks for all you do!</div>
+            <div>🎈 <span class="name">Mia R.</span> — Oct 29 — Keep shining bright!</div>
+            <div class="spacer"></div>
+            <div class="small">Tip: group several names per month in a single slide.</div>
+          </li>
+
+          <!-- EXAMPLE B: One slide per PERSON (simple, rotates continuously) -->
+          <li class="glide__slide">🎉 Happy Birthday, <span class="name">Lea</span>! You make our team shine. 🌟</li>
+          <li class="glide__slide">🎂 Cheers to you, <span class="name">Sam</span>! Enjoy your special day.</li>
+          <li class="glide__slide">🎈 Have an awesome day, <span class="name">Mia</span>! Keep being amazing.</li>
+          <li class="glide__slide">🥳 Wishing you joy and success, <span class="name">Aria</span>!</li>
+        </ul>
+      </div>
+
+      <!-- Optional arrows (accessible controls) -->
+      <div data-glide-el="controls" aria-label="Carousel controls">
+        <button aria-label="Previous" data-glide-dir="<">‹ Prev</button>
+        <button aria-label="Next" data-glide-dir=">">Next ›</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Glide JS (from CDN) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.2.0/glide.min.js"></script>
+  <script>
+    // Initialize the carousel
+    new Glide('.glide', {
+      type: 'carousel',
+      autoplay: 3000,           // 3 seconds per slide
+      hoverpause: true,         // pause when mouse is over
+      animationDuration: 600,
+      perView: 1,
+      gap: 16,
+      keyboard: true,
+      breakpoints: {            // responsive tweaks
+        768: { gap: 8 },
+        480: { gap: 4 }
+      }
+    }).mount();
+  </script>
+</body>
+</html>
