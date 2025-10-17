@@ -104,4 +104,77 @@
       <div class="swiper-wrapper" id="slides"></div>
 
       <!-- Controls -->
-      <div class="swiper-button-prev" aria-label="Previous slide"></div
+      <div class="swiper-button-prev" aria-label="Previous slide"></div>
+      <div class="swiper-button-next" aria-label="Next slide"></div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </div>
+
+  <!-- Swiper JS -->
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+  <script>
+    // Load messages dynamically from messages.json
+    fetch('messages.json')
+      .then(r => {
+        if (!r.ok) throw new Error('messages.json not found');
+        return r.json();
+      })
+      .then(messages => {
+        const wrapper = document.getElementById('slides');
+
+        messages.forEach(text => {
+          const slide = document.createElement('div');
+          slide.className = 'swiper-slide';
+          // convert \n to real line breaks
+          const safeText = escapeHtml(text).replaceAll('\\n', '<br>');
+          slide.innerHTML = `<div class="msg">${safeText}</div>`;
+          wrapper.appendChild(slide);
+        });
+
+        // Initialize Swiper with 3D coverflow effect
+        new Swiper('.swiper', {
+          effect: 'coverflow',
+          grabCursor: true,
+          centeredSlides: true,
+          slidesPerView: 'auto',
+          loop: true,
+          autoplay: { delay: 3500, disableOnInteraction: false },
+          coverflowEffect: {
+            rotate: 20,   // tilt angle (set to 0 for flat)
+            stretch: 0,
+            depth: 220,
+            modifier: 1,
+            slideShadows: false
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev'
+          },
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true
+          }
+        });
+      })
+      .catch(err => {
+        console.error(err);
+        const wrapper = document.getElementById('slides');
+        const slide = document.createElement('div');
+        slide.className = 'swiper-slide';
+        slide.textContent = '⚠️ Could not load messages.json';
+        wrapper.appendChild(slide);
+      });
+
+    // Basic HTML escaper
+    function escapeHtml(str){
+      return String(str)
+        .replaceAll('&','&amp;')
+        .replaceAll('<','&lt;')
+        .replaceAll('>','&gt;')
+        .replaceAll('"','&quot;')
+        .replaceAll("'",'&#39;');
+    }
+  </script>
+</body>
+</html>
