@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,11 +11,11 @@
 
   <style>
     :root{
-      --page-bg:#ffffff;   /* page background */
+      --page-bg:#fff;      /* page background */
       --card-bg:#0f1116;   /* dark card */
       --card-border:#7f8596;
       --title:#000;        /* title color */
-      --text:#fff;         /* slide text color */
+      --text:#fff;         /* slide text */
       --arrow:#fff;        /* arrow color */
     }
 
@@ -26,18 +27,17 @@
     }
 
     .wrap{
-      max-width:600px;       /* ~25% narrower than 800 */
+      max-width:600px;                 /* ~25% narrower than 800 */
       margin:24px auto;
       padding:0 16px;
       text-align:center;
     }
 
-    /* Title */
     .carousel-title{
       color:var(--title);
       font-size:20px;
       font-weight:700;
-      margin:0 0 12px;
+      margin:0 0 10px;
       line-height:1.35;
     }
     .carousel-title span{
@@ -47,18 +47,22 @@
       font-weight:400;
     }
 
-    /* Swiper container = visible carousel height  */
+    /* === VERTICAL CAROUSEL BOX ===
+       Height here = 1 slide height exactly */
     .swiper{
       width:100%;
-      height:120px;          /* <<< compact height */
-      padding:0;             /* no extra space around slides */
+      height:120px;                     /* <<< set your exact slide height */
+      padding:0;                        /* no extra padding */
       position:relative;
-      overflow:hidden;
+      overflow:hidden;                  /* prevent any peek-through */
     }
 
-    /* Slides fill the container height */
+    /* Slides fill the container perfectly */
+    .swiper-wrapper{
+      /* ensure no accidental gaps from CSS resets */
+    }
     .swiper-slide{
-      height:100%;
+      height:100%;                      /* fill the .swiper height */
       background:var(--card-bg);
       color:var(--text) !important;
       border-radius:12px;
@@ -67,12 +71,11 @@
       align-items:center;
       justify-content:center;
       text-align:center;
-      padding:8px 12px;      /* tight padding so card ≈ text height */
+      padding:0 12px;                   /* horizontal only; no vertical padding */
       font-size:16px;
       line-height:1.4;
       box-shadow:0 4px 12px rgba(0,0,0,.25);
     }
-
     .msg{
       max-width:92%;
       white-space:pre-wrap;
@@ -81,13 +84,13 @@
       user-select:none;
     }
 
-    /* Vertical arrows: smaller + white, near edges */
+    /* Arrows: white & smaller, overlayed without changing layout */
     .swiper-button-prev,
     .swiper-button-next{
       left:50%;
       transform:translateX(-50%);
-      width:28px; height:28px;      /* smaller */
-      color:var(--arrow);           /* white arrow glyph */
+      width:13px; height:13px;
+      color:var(--arrow);
       background:rgba(255,255,255,.10);
       border:1px solid rgba(255,255,255,.35);
       border-radius:999px;
@@ -97,17 +100,15 @@
     .swiper-button-prev:after,
     .swiper-button-next:after{ font-size:14px; }
 
-    /* Vertical bullets appear on the right by default */
-    .swiper-pagination{
-      right:6px !important;
-    }
+    /* Keep bullets but they won't affect height */
+    .swiper-pagination{ right:6px !important; }
     .swiper-pagination-bullet{ background:#000; opacity:.35; }
     .swiper-pagination-bullet-active{ opacity:1; }
 
     @media (max-width:520px){
       .wrap{ max-width:92%; }
       .swiper{ height:110px; }
-      .swiper-slide{ font-size:15px; padding:8px; }
+      .swiper-slide{ font-size:15px; }
     }
   </style>
 </head>
@@ -147,14 +148,17 @@
         });
 
         new Swiper('.swiper', {
-          direction:'vertical',
-          slidesPerView:1,
-          spaceBetween:8,
-          loop:true,
-          autoplay:{ delay:3500, disableOnInteraction:false },
-          mousewheel:true,
-          pagination:{ el:'.swiper-pagination', clickable:true },
-          navigation:{ nextEl:'.swiper-button-next', prevEl:'.swiper-button-prev' }
+          direction: 'vertical',
+          slidesPerView: 1,          // exactly one slide visible
+          spaceBetween: 0,           // <<< no gap = no “peek”
+          centeredSlides: false,     // exact top alignment
+          loop: true,
+          speed: 450,                // smooth but snappy
+          autoplay: { delay: 3000, disableOnInteraction: false },
+          mousewheel: { forceToAxis: true }, // vertical-only scroll
+          pagination: { el: '.swiper-pagination', clickable: true },
+          navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+          allowTouchMove: true
         });
       })
       .catch(err => {
