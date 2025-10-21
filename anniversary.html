@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Service Anniversary Carousel (Vertical)</title>
+
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+
+  <style>
+    :root{
+      --page-bg:#fff;
+      --card-bg:#0f1116;
+      --card-border:#7f8596;
+      --title:#000;
+      --text:#fff;
+      --arrow:#fff;
+    }
+
+    * { box-sizing: border-box; }
+    html,body{
+      margin:0;
+      background:var(--page-bg);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:#222;
+      overflow-x:hidden;
+    }
+
+    .wrap{
+      max-width:100%;
+      margin:16px auto;
+      padding:0 8px;
+      text-align:center;
+    }
+
+    .inner{
+      max-width:600px;
+      margin:0 auto;
+    }
+
+    /* Title */
+    .carousel-title{
+      color:var(--title);
+      font-size:16px;
+      font-weight:700;
+      margin:0 0 8px;
+      line-height:1.35;
+    }
+    .carousel-title span{
+      display:block;
+      color:#444;
+      font-size:12px;
+      font-weight:400;
+    }
+
+    /* Swiper Container */
+    .swiper{
+      width:100%;
+      height:120px;          /* 1 slide = 120px tall */
+      padding:0;
+      position:relative;
+      overflow:hidden;
+    }
+
+    /* Slides */
+    .swiper-slide{
+      height:100%;
+      background:var(--card-bg);
+      color:var(--text) !important;
+      border-radius:12px;
+      border:1px solid rgba(127,133,150,.4);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:0 12px;        /* no vertical padding → exact height */
+      font-size:15px;
+      line-height:1.4;
+      box-shadow:0 4px 12px rgba(0,0,0,.25);
+    }
+    .msg{
+      max-width:92%;
+      white-space:pre-wrap;
+      color:var(--text) !important;
+      margin:0 auto;
+      user-select:none;
+    }
+
+    /* Arrows */
+    .swiper-button-prev,
+    .swiper-button-next{
+      left:50%;
+      transform:translateX(-50%);
+      width:26px; height:26px;
+      color:var(--arrow);
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.35);
+      border-radius:999px;
+    }
+    .swiper-button-prev{ top:4px; }
+    .swiper-button-next{ bottom:4px; }
+    .swiper-button-prev:after,
+    .swiper-button-next:after{ font-size:14px; }
+
+    /* Pagination */
+    .swiper-pagination{ right:6px !important; }
+    .swiper-pagination-bullet{ background:#000; opacity:.35; }
+    .swiper-pagination-bullet-active{ opacity:1; }
+
+    @media (max-width:520px){
+      .inner{ max-width:92%; }
+      .swiper{ height:110px; }
+      .swiper-slide{ font-size:14px; }
+      .carousel-title{ font-size:15px; }
+      .carousel-title span{ font-size:12px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="inner">
+      <h1 class="carousel-title">
+        💼 This Month’s Service Anniversaries
+        <span>Thank you for your dedication and years of service!</span>
+      </h1>
+
+      <div class="swiper">
+        <div class="swiper-wrapper" id="slides"></div>
+        <div class="swiper-button-prev" aria-label="Previous"></div>
+        <div class="swiper-button-next" aria-label="Next"></div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Swiper JS -->
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+  <script>
+    const cacheBuster = 'ts=' + Date.now();
+
+    // Load from a separate JSON file just for anniversaries
+    fetch('anniversary.json?' + cacheBuster, { cache: 'no-store' })
+      .then(r => { if(!r.ok) throw new Error('anniversary.json not found'); return r.json(); })
+      .then(items => {
+        const wrapper = document.getElementById('slides');
+
+        items.forEach(text => {
+          const slide = document.createElement('div');
+          slide.className = 'swiper-slide';
+          const safeText = escapeHtml(text).replaceAll('\\n','<br>');
+          slide.innerHTML = `<div class="msg">${safeText}</div>`;
+          wrapper.appendChild(slide);
+        });
+
+        new Swiper('.swiper', {
+          direction:'vertical',
+          slidesPerView:1,
+          spaceBetween:0,
+          centeredSlides:false,
+          loop:true,
+          speed:450,
+          autoplay:{ delay:3000, disableOnInteraction:false },
+          mousewheel:{ forceToAxis:true },
+          pagination:{ el:'.swiper-pagination', clickable:true },
+          navigation:{ nextEl:'.swiper-button-next', prevEl:'.swiper-button-prev' }
+        });
+      })
+      .catch(err => {
+        console.error(err);
+        const wrapper = document.getElementById('slides');
+        const slide = document.createElement('div');
+        slide.className = 'swiper-slide';
+        slide.textContent = '⚠️ Could not load anniversary.json';
+        wrapper.appendChild(slide);
+      });
+
+    function escapeHtml(str){
+      return String(str)
+        .replaceAll('&','&amp;')
+        .replaceAll('<','&lt;')
+        .replaceAll('>','&gt;')
+        .replaceAll('"','&quot;')
+        .replaceAll("'",'&#39;');
+    }
+  </script>
+</body>
+</html>
