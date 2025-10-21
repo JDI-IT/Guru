@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Birthday Carousel (Vertical)</title>
+
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+
+  <style>
+    /* 🎨 Theme (tweak freely) */
+    :root{
+      --page-bg:#0f1116;      /* page background */
+      --card-bg:#171a22;      /* slide background */
+      --card-border:#7f8596;  /* border */
+      --text:#e7e9ef;         /* text */
+      --accent:#c4c9d6;       /* arrows/pagination */
+    }
+
+    html,body{
+      margin:0;
+      height:100%;
+      background:var(--page-bg);
+      color:var(--text);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    .wrap{
+      max-width:800px;
+      margin:24px auto 24px;
+      padding:0 16px;
+    }
+
+    /* Swiper container: give it a fixed height for vertical scrolling */
+    .swiper{
+      width:100%;
+      height:600px;         /* 👈 adjust overall height of the carousel */
+      padding:0 0 36px 0;   /* space for bottom dots */
+      position: relative;
+    }
+
+    /* Slides (cards) fill the container height */
+    .swiper-slide{
+      background:var(--card-bg);
+      width:auto;
+      height:100%;
+      border-radius:16px;
+      border:2px solid rgba(127,133,150,0.5);
+      box-shadow:0 10px 30px rgba(0,0,0,0.35);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:26px;
+      line-height:1.6;
+      font-size:17px;
+      transition:border-color .2s ease;
+    }
+    .swiper-slide:hover{ border-color:var(--card-border); }
+
+    .msg{
+      max-width:90%;
+      margin:0 auto;
+      user-select:none;
+      white-space:pre-wrap; /* preserve \n line breaks */
+    }
+
+    /* Arrows: center horizontally; place one at top, one at bottom */
+    .swiper-button-prev, .swiper-button-next{
+      left:50%;
+      transform: translateX(-50%);
+      color:var(--accent);
+      width:44px; height:44px;
+      background:rgba(255,255,255,0.08);
+      border-radius:999px;
+      backdrop-filter:blur(2px);
+    }
+    .swiper-button-prev{ top:10px; }
+    .swiper-button-next{ bottom:52px; } /* above pagination dots */
+
+    .swiper-button-prev:after,
+    .swiper-button-next:after{ font-size:18px; }
+
+    /* Dots */
+    .swiper-pagination{
+      bottom:10px !important;
+    }
+    .swiper-pagination-bullet{ background:var(--accent); opacity:.45; }
+    .swiper-pagination-bullet-active{ opacity:1; }
+
+    @media (max-width:520px){
+      .swiper{ height:520px; }            /* shorter on phones */
+      .swiper-slide{ font-size:15px; padding:18px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="swiper">
+      <div class="swiper-wrapper" id="slides"></div>
+      <div class="swiper-button-prev" aria-label="Previous"></div>
+      <div class="swiper-button-next" aria-label="Next"></div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </div>
+
+  <!-- Swiper JS -->
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+  <script>
+    // Cache-bust messages.json so updates show immediately
+    const cacheBuster = 'ts=' + Date.now();
+
+    fetch('messages.json?' + cacheBuster, { cache: 'no-store' })
+      .then(r => {
+        if (!r.ok) throw new Error('messages.json not found');
+        return r.json();
+      })
+      .then(messages => {
+        const wrapper = document.getElementById('slides');
+
+        messages.forEach(text => {
+          const slide = document.createElement('div');
+          slide.className = 'swiper-slide';
+          const safeText = escapeHtml(text).replaceAll('\\n', '<br>');
+          slide.innerHTML = `<div class="msg">${safeText}</div>`;
+          wrapper.appendChild(slide);
+        });
+
+        // Vertical Swiper
+        new Swiper('.swiper', {
+          direction: 'vertical',         // 👈 vertical mode
+          slidesPerView: 1,
+          spaceBetween: 20,
+          loop: true,
+          autoplay: { delay: 3500, disableOnInteraction: false },
+          mousewheel: true,              // scroll wheel support
+          pagination: { el: '.swiper-pagination', clickable: true },
+          navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }
+        });
+      })
+      .catch(err=>{
+        console.error(err);
+        const wrapper=document.getElementById('slides');
+        const slide=document.createElement('div');
+        slide.className='swiper-slide';
+        slide.textContent='⚠️ Could not load messages.json';
+        wrapper.appendChild(slide);
+      });
+
+    function escapeHtml(str){
+      return String(str)
+        .replaceAll('&','&amp;')
+        .replaceAll('<','&lt;')
+        .replaceAll('>','&gt;')
+        .replaceAll('"','&quot;')
+        .replaceAll("'",'&#39;');
+    }
+  </script>
+</body>
+</html>
