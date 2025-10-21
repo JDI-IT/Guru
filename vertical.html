@@ -9,13 +9,13 @@
   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
 
   <style>
-    /* 🎨 Theme (tweak freely) */
+    /* 🎨 Theme */
     :root{
-      --page-bg:#ffffff;      /* page background */
+      --page-bg:#0f1116;      /* page background */
       --card-bg:#171a22;      /* slide background */
       --card-border:#7f8596;  /* border */
-      --text:#e7e9ef;         /* text */
-      --accent:#c4c9d6;       /* arrows/pagination */
+      --text:#e7e9ef;         /* text color */
+      --accent:#c4c9d6;       /* title, arrows, dots */
     }
 
     html,body{
@@ -30,19 +30,37 @@
 
     .wrap{
       max-width:800px;
-      margin:24px auto 24px;
+      margin:24px auto;
       padding:0 16px;
+      text-align:center;
     }
 
-    /* Swiper container: give it a fixed height for vertical scrolling */
+    /* 🧁 Title styling */
+    .carousel-title {
+      text-align: center;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 20px;
+      line-height: 1.4;
+    }
+
+    .carousel-title span {
+      display: block;
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--text);
+    }
+
+    /* 🧱 Swiper container */
     .swiper{
       width:100%;
-      height:600px;         /* 👈 adjust overall height of the carousel */
-      padding:0 0 36px 0;   /* space for bottom dots */
+      height:600px;           /* overall carousel height */
+      padding:0 0 36px 0;
       position: relative;
     }
 
-    /* Slides (cards) fill the container height */
+    /* 🎠 Slides */
     .swiper-slide{
       background:var(--card-bg);
       width:auto;
@@ -56,20 +74,24 @@
       text-align:center;
       padding:26px;
       line-height:1.6;
-      font-size:12px;
+      font-size:17px;
       transition:border-color .2s ease;
     }
-    .swiper-slide:hover{ border-color:var(--card-border); }
+
+    .swiper-slide:hover{
+      border-color: var(--card-border);
+    }
 
     .msg{
       max-width:90%;
       margin:0 auto;
       user-select:none;
-      white-space:pre-wrap; /* preserve \n line breaks */
+      white-space:pre-wrap; /* preserve \n breaks */
     }
 
-    /* Arrows: center horizontally; place one at top, one at bottom */
-    .swiper-button-prev, .swiper-button-next{
+    /* 🔼🔽 Arrows (top/bottom) */
+    .swiper-button-prev,
+    .swiper-button-next{
       left:50%;
       transform: translateX(-50%);
       color:var(--accent);
@@ -78,27 +100,51 @@
       border-radius:999px;
       backdrop-filter:blur(2px);
     }
+
     .swiper-button-prev{ top:10px; }
-    .swiper-button-next{ bottom:52px; } /* above pagination dots */
+    .swiper-button-next{ bottom:52px; }
 
     .swiper-button-prev:after,
     .swiper-button-next:after{ font-size:18px; }
 
-    /* Dots */
+    /* Pagination dots */
     .swiper-pagination{
       bottom:10px !important;
     }
-    .swiper-pagination-bullet{ background:var(--accent); opacity:.45; }
-    .swiper-pagination-bullet-active{ opacity:1; }
+
+    .swiper-pagination-bullet{
+      background:var(--accent);
+      opacity:.45;
+    }
+
+    .swiper-pagination-bullet-active{
+      opacity:1;
+    }
 
     @media (max-width:520px){
-      .swiper{ height:520px; }            /* shorter on phones */
-      .swiper-slide{ font-size:15px; padding:18px; }
+      .swiper{ height:520px; }
+      .swiper-slide{
+        font-size:15px;
+        padding:18px;
+      }
+      .carousel-title{
+        font-size:20px;
+      }
+      .carousel-title span{
+        font-size:16px;
+      }
     }
   </style>
 </head>
 <body>
   <div class="wrap">
+    <!-- 🎉 Title -->
+    <h1 class="carousel-title">
+      🎉 Happiest Birthday to this month’s celebrants! 🎂<br>
+      <span>Wishing you all a wonderful year ahead!</span>
+    </h1>
+
+    <!-- 🪄 Carousel -->
     <div class="swiper">
       <div class="swiper-wrapper" id="slides"></div>
       <div class="swiper-button-prev" aria-label="Previous"></div>
@@ -111,7 +157,7 @@
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
   <script>
-    // Cache-bust messages.json so updates show immediately
+    // Prevent caching old messages.json
     const cacheBuster = 'ts=' + Date.now();
 
     fetch('messages.json?' + cacheBuster, { cache: 'no-store' })
@@ -130,14 +176,14 @@
           wrapper.appendChild(slide);
         });
 
-        // Vertical Swiper
+        // 🔄 Initialize vertical Swiper
         new Swiper('.swiper', {
-          direction: 'vertical',         // 👈 vertical mode
+          direction: 'vertical',
           slidesPerView: 1,
           spaceBetween: 20,
           loop: true,
           autoplay: { delay: 3500, disableOnInteraction: false },
-          mousewheel: true,              // scroll wheel support
+          mousewheel: true,
           pagination: { el: '.swiper-pagination', clickable: true },
           navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }
         });
