@@ -3,186 +3,133 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Birthday Carousel (Vertical)</title>
-
-  <!-- Swiper CSS -->
+  <title>Birthday Carousel (Vertical - Compact)</title>
   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
 
   <style>
-    /* 🎨 Theme Colors */
-    :root {
-      --page-bg: #ffffff;       /* white background */
-      --card-bg: #0f1116;       /* dark cards */
-      --card-border: #7f8596;   /* subtle border */
-      --text: #222222;          /* default text (for page, not cards) */
-      --accent: #000000;        /* black title color */
+    :root{
+      --page-bg:#ffffff;     /* page */
+      --card-bg:#0f1116;     /* dark cards */
+      --card-border:#7f8596;
+      --text:#222;           /* default page text */
+      --accent:#000;         /* title & dots */
     }
 
-    html, body {
-      margin: 0;
-      height: 100%;
-      background: var(--page-bg);
-      color: var(--text);
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
+    html,body{
+      margin:0;
+      background:var(--page-bg);
+      color:var(--text);
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
     }
 
-    .wrap {
-      max-width: 800px;
-      margin: 24px auto;
-      padding: 0 16px;
-      text-align: center;
+    /* ===== Width of the carousel section =====
+       Pick ONE of the two blocks below.
+       A) ~25% LESS than 800px -> 600px
+       B) Your example (800 -> 200px) i.e., very narrow
+    */
+
+    /* A) 25% less (800 -> 600) */
+    .wrap { max-width: 600px; margin: 16px auto; padding: 0 12px; text-align: center; }
+
+    /* B) 800 -> 200px (uncomment this and comment A if you want it this narrow) */
+    /* .wrap { max-width: 200px; margin: 16px auto; padding: 0 8px; text-align: center; } */
+
+    .carousel-title{
+      font-size:18px; font-weight:700; color:var(--accent);
+      margin:0 0 6px; line-height:1.3;
+    }
+    .carousel-title span{
+      display:block; font-size:14px; color:#555; font-weight:400;
+      margin-bottom:8px;
     }
 
-    /* 🎉 Title */
-    .carousel-title {
-      text-align: center;
-      font-size: 24px;
-      font-weight: 700;
-      color: var(--accent);
-      margin-bottom: 20px;
-      line-height: 1.4;
+    /* ===== Swiper container =====
+       Let it auto-size to the active slide (no fixed height). */
+    .swiper{
+      width:100%;
+      height:auto;              /* key: let Swiper size itself */
+      padding:0 0 18px 0;       /* room for dots */
+      position:relative;
     }
 
-    .carousel-title span {
-      display: block;
-      font-size: 18px;
-      font-weight: 400;
-      color: #444444;
+    /* ===== Slides: hug content ===== */
+    .swiper-slide{
+      background:var(--card-bg);
+      color:#fff !important;
+      border:1px solid rgba(127,133,150,.5);
+      border-radius:12px;
+      box-shadow:0 6px 18px rgba(0,0,0,.25);
+      display:flex; align-items:center; justify-content:center; text-align:center;
+      padding:10px 14px;        /* tighter padding for compact height */
+      line-height:1.35;
+      font-size:16px;
+      height:auto;              /* key: allow natural height */
     }
 
-    /* 🎠 Swiper Container */
-    .swiper {
-      width: 100%;
-      height: 450px; /* reduced by ~25% from 600px */
-      padding: 0 0 36px 0;
-      position: relative;
-    }
-
-    /* 🧱 Slides */
-    .swiper-slide {
-      background: var(--card-bg);
-      width: auto;
-      height: 100%;
-      border-radius: 16px;
-      border: 2px solid rgba(127,133,150,0.5);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 26px;
-      line-height: 1.6;
-      font-size: 17px;
-      transition: border-color .2s ease;
-      color: #ffffff !important; /* ✅ ensures white text on dark cards */
-    }
-
-    .swiper-slide:hover {
-      border-color: var(--card-border);
-    }
-
-    .msg {
-      max-width: 90%;
-      margin: 0 auto;
-      user-select: none;
+    .msg{
+      max-width: 100%;
       white-space: pre-wrap;
-      color: #ffffff !important; /* ✅ ensures white text inside message */
+      color:#fff !important;
     }
 
-    /* 🔼🔽 Arrows */
-    .swiper-button-prev,
-    .swiper-button-next {
-      left: 50%;
-      transform: translateX(-50%);
-      color: #000000; /* black arrows for light background */
-      width: 44px;
-      height: 44px;
-      background: rgba(0, 0, 0, 0.08);
-      border-radius: 999px;
-      backdrop-filter: blur(2px);
-    }
+    /* Hide arrows for compact layout (dots + autoplay is cleaner) */
+    .swiper-button-prev, .swiper-button-next{ display:none; }
 
-    .swiper-button-prev { top: 10px; }
-    .swiper-button-next { bottom: 52px; }
+    /* Dots */
+    .swiper-pagination { position:relative; bottom:0 !important; margin-top:10px; }
+    .swiper-pagination-bullet{ background:var(--accent); opacity:.45; }
+    .swiper-pagination-bullet-active{ opacity:1; }
 
-    .swiper-button-prev:after,
-    .swiper-button-next:after { font-size: 18px; }
-
-    /* ⚪ Pagination dots */
-    .swiper-pagination { bottom: 10px !important; }
-
-    .swiper-pagination-bullet {
-      background: #000000;
-      opacity: 0.45;
-    }
-
-    .swiper-pagination-bullet-active {
-      opacity: 1;
-    }
-
-    @media (max-width: 520px) {
-      .swiper { height: 380px; } /* proportionally smaller on mobile */
-      .swiper-slide { font-size: 15px; padding: 18px; }
-      .carousel-title { font-size: 20px; }
-      .carousel-title span { font-size: 16px; }
+    @media (max-width:480px){
+      .carousel-title{ font-size:16px; }
+      .carousel-title span{ font-size:13px; }
+      .swiper-slide{ font-size:15px; padding:8px 12px; }
     }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <!-- 🎉 Title -->
     <h1 class="carousel-title">
-      🎉 Happiest Birthday to this month’s celebrants! 🎂<br>
+      🎉 Happiest Birthday to this month’s celebrants! 🎂
       <span>Wishing you all a wonderful year ahead!</span>
     </h1>
 
-    <!-- 🪄 Carousel -->
     <div class="swiper">
       <div class="swiper-wrapper" id="slides"></div>
-      <div class="swiper-button-prev" aria-label="Previous"></div>
-      <div class="swiper-button-next" aria-label="Next"></div>
       <div class="swiper-pagination"></div>
     </div>
   </div>
 
-  <!-- Swiper JS -->
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-
   <script>
-    // Prevent caching old messages.json
     const cacheBuster = 'ts=' + Date.now();
 
-    fetch('messages.json?' + cacheBuster, { cache: 'no-store' })
-      .then(r => {
-        if (!r.ok) throw new Error('messages.json not found');
-        return r.json();
-      })
+    fetch('messages.json?' + cacheBuster, { cache:'no-store' })
+      .then(r => { if(!r.ok) throw new Error('messages.json not found'); return r.json(); })
       .then(messages => {
         const wrapper = document.getElementById('slides');
-
         messages.forEach(text => {
           const slide = document.createElement('div');
           slide.className = 'swiper-slide';
-          const safeText = escapeHtml(text).replaceAll('\\n', '<br>');
+          const safeText = escapeHtml(text).replaceAll('\\n','<br>');
           slide.innerHTML = `<div class="msg">${safeText}</div>`;
           wrapper.appendChild(slide);
         });
 
-        // Initialize vertical Swiper
         new Swiper('.swiper', {
           direction: 'vertical',
           slidesPerView: 1,
-          spaceBetween: 20,
+          spaceBetween: 10,
           loop: true,
-          autoplay: { delay: 3500, disableOnInteraction: false },
+          autoplay: { delay: 3000, disableOnInteraction: false },
           mousewheel: true,
-          pagination: { el: '.swiper-pagination', clickable: true },
-          navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }
+          autoHeight: true,                  // 🔑 slide height matches content
+          pagination: { el: '.swiper-pagination', clickable: true }
         });
       })
-      .catch(err => {
+      .catch(err=>{
         console.error(err);
         const wrapper = document.getElementById('slides');
         const slide = document.createElement('div');
@@ -191,13 +138,13 @@
         wrapper.appendChild(slide);
       });
 
-    function escapeHtml(str) {
+    function escapeHtml(str){
       return String(str)
-        .replaceAll('&', '&amp;')
-        .replaceAll('<', '&lt;')
-        .replaceAll('>', '&gt;')
-        .replaceAll('"', '&quot;')
-        .replaceAll("'", '&#39;');
+        .replaceAll('&','&amp;')
+        .replaceAll('<','&lt;')
+        .replaceAll('>','&gt;')
+        .replaceAll('"','&quot;')
+        .replaceAll("'",'&#39;');
     }
   </script>
 </body>
