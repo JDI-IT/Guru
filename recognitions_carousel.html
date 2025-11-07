@@ -10,12 +10,12 @@
 
   <style>
     :root{
-      --page-bg: transparent;  /* transparent so it blends with Guru */
+      --page-bg: transparent;  /* transparent to blend with Guru */
       --card-bg:#ffffff;
       --text:#171717;
       --muted:#5f6368;
       --ring:#e5e7eb;
-      --accent:#111827;  /* arrow/icon/text accent */
+      --accent:#111827;
       --brand:#111827;
       --radius:16px;
       --shadow:0 12px 28px rgba(0,0,0,.15);
@@ -78,9 +78,9 @@
     }
     @media (max-width:720px){ .btn-link{ justify-content:center; } }
 
-    /* ✅ Option B: Text-only layout when no photo is provided */
+    /* ✅ Text-only layout (no photo) */
     .card.no-photo{
-      grid-template-columns: 1fr;   /* single column */
+      grid-template-columns: 1fr;
       text-align: center;
       justify-items: center;
       padding: 24px 20px;
@@ -88,22 +88,21 @@
     .card.no-photo .name{ font-size:20px; }
     .card.no-photo .message{ max-width:70ch; }
 
-    /* ✅ Arrows only (smaller, dark, no background) */
+    /* ✅ Small, dark arrows */
     .swiper-button-prev, .swiper-button-next{
       color: var(--accent);
       background: transparent;
-      width: 15px;   /* half size */
-      height: 15px;
+      width: 15px; height: 15px;
       border: none;
     }
     .swiper-button-prev:after, .swiper-button-next:after{
-      font-size: 12px;  /* smaller arrow icon */
+      font-size: 12px;
     }
     .swiper-button-prev:hover, .swiper-button-next:hover{
-      color: #444;  /* subtle hover contrast */
+      color: #444;
     }
 
-    /* No pagination dots */
+    /* Remove pagination dots */
     .swiper-pagination{ display:none; }
 
     /* Empty state */
@@ -128,7 +127,6 @@
   <script>
     // 0 = hide future items until their date; set >0 to preview N days ahead
     const SHOW_AHEAD_DAYS = 0;
-
     const cacheBuster = 'ts=' + Date.now();
 
     fetch('recognitions.json?' + cacheBuster, { cache: 'no-store' })
@@ -152,14 +150,13 @@
         const wrapper = document.getElementById('slides');
 
         data.forEach(x => {
-          const name = x.name ? `👏 ${escapeHtml(x.name)}` : '👏 Teammate';
+          const name = x.name ? `👏 ${x.name}` : '👏 Teammate';
           const meta = [x.department, x.date].filter(Boolean).join(' • ');
-          const msg = escapeHtml(x.message || '');
+          const msg = x.message || ''; // ✅ allow HTML now
 
-          // ✅ Only include image block if photo is provided
           const hasPhoto = !!x.photo;
           const imgBlock = hasPhoto
-            ? `<img class="avatar" src="${x.photo}" alt="Headshot of ${escapeHtml(x.name || 'Teammate')}" loading="lazy">`
+            ? `<img class="avatar" src="${x.photo}" alt="Headshot of ${x.name || 'Teammate'}" loading="lazy">`
             : '';
 
           const cardClass = hasPhoto ? 'card' : 'card no-photo';
@@ -171,7 +168,7 @@
               ${imgBlock}
               <div>
                 <h3 class="name">${name}</h3>
-                <div class="meta">${escapeHtml(meta)}</div>
+                <div class="meta">${meta}</div>
                 <p class="message clamp">${msg}</p>
                 <button class="btn-link js-toggle" type="button">Read more</button>
               </div>
@@ -194,14 +191,12 @@
             pauseOnMouseEnter: true
           },
           navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
-          // Responsive counts
           breakpoints: {
             720: { slidesPerView: 2, spaceBetween: 18 },
             1024:{ slidesPerView: 3, spaceBetween: 20 }
           }
         });
 
-        // Expand/collapse + re-measure height
         document.querySelectorAll('.js-toggle').forEach(btn => {
           btn.addEventListener('click', (e) => {
             const p = e.currentTarget.closest('.card').querySelector('.message');
@@ -219,17 +214,9 @@
       });
 
     // Helpers
-    function escapeHtml(str){
-      return String(str || '')
-        .replaceAll('&','&amp;')
-        .replaceAll('<','&lt;')
-        .replaceAll('>','&gt;')
-        .replaceAll('"','&quot;')
-        .replaceAll("'",'&#39;');
-    }
     function parseISO(v){
       if(!v) return null;
-      const d = new Date(v + 'T00:00:00'); // local midnight
+      const d = new Date(v + 'T00:00:00');
       return isNaN(d.getTime()) ? null : stripTime(d);
     }
     function stripTime(d){ const t=new Date(d); t.setHours(0,0,0,0); return t; }
