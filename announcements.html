@@ -125,18 +125,15 @@
   fetch('announcements.json?' + cacheBuster, { cache: 'no-store' })
     .then(r => { if(!r.ok) throw new Error('announcements.json not found'); return r.json(); })
     .then(items => {
-      // Date window: last 1 month (inclusive), up to today
-      const now = new Date();
-      const oneMonthAgo = new Date(now);
-      oneMonthAgo.setMonth(now.getMonth() - 1);
+      // Date window: last 1 month (inclusive) up to today (no future)
+      const now = stripTime(new Date());
+      const oneMonthAgo = stripTime(addMonths(now, -1));
 
       all = (items || [])
-        // filter out older than 1 month
         .filter(x => {
           const d = parseISO(x.date);
-          return d && d >= stripTime(oneMonthAgo) && d <= stripTime(now);
+          return d && d >= oneMonthAgo && d <= now;   // 👈 keep last 1 month only; hide future
         })
-        // normalize
         .map(x => ({
           title: String(x.title || '').trim(),
           date: parseISO(x.date),
@@ -145,7 +142,6 @@
           url: String(x.url || '#').trim(),
           tag: String(x.tag || '').trim()
         }))
-        // newest first
         .sort((a,b) => (b.date?.getTime()||0) - (a.date?.getTime()||0));
 
       filtered = all.slice();
@@ -181,19 +177,21 @@
 
   // Helpers
   function esc(s){ return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;'); }
-
-  // Robust ISO date parsing for 'YYYY-MM-DD'
   function parseISO(v){
     if(!v) return null;
-    // Force midnight local to avoid TZ drift
-    const d = new Date(v + 'T00:00:00');
-    return isNaN(d.getTime()) ? null : d;
+    const d = new Date(v + 'T00:00:00'); // local midnight to avoid TZ drift
+    return isNaN(d.getTime()) ? null : stripTime(d);
   }
   function stripTime(d){
     const t = new Date(d);
     t.setHours(0,0,0,0);
     return t;
-    }
+  }
+  function addMonths(d, n){
+    const t = new Date(d);
+    t.setMonth(t.getMonth() + n);
+    return t;
+  }
 
   // search
   q.addEventListener('input', () => {
