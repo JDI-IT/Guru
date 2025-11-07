@@ -31,16 +31,10 @@
     .wrap{ max-width:1100px; margin:18px auto; padding:0 12px; }
 
     /* Swiper container */
-    .swiper{
-      width:100%;
-      padding:8px 6px 32px;
-    }
+    .swiper{ width:100%; padding:8px 6px 8px; }
 
-    /* Card (slide) */
-    .swiper-slide{
-      height:auto;                       /* allow autoHeight to size per slide */
-      display:flex;
-    }
+    /* Slides */
+    .swiper-slide{ height:auto; display:flex; }
     .card{
       background:var(--card-bg);
       border:1px solid var(--ring);
@@ -83,17 +77,15 @@
     }
     @media (max-width:720px){ .btn-link{ justify-content:center; } }
 
-    /* Swiper controls */
+    /* Arrows only (no dots) */
     .swiper-button-prev, .swiper-button-next{
       color:#fff; background:rgba(255,255,255,.12);
       border:1px solid rgba(255,255,255,.35);
       width:30px; height:30px; border-radius:999px;
     }
     .swiper-button-prev:after, .swiper-button-next:after{ font-size:16px; }
-    .swiper-pagination-bullet{ background:#fff; opacity:.35 }
-    .swiper-pagination-bullet-active{ opacity:1 }
 
-    /* Empty state */
+    /* Empty */
     .empty{ color:#fff; opacity:.85; text-align:center; padding:28px 0 }
   </style>
 </head>
@@ -106,7 +98,7 @@
 
       <div class="swiper-button-prev" aria-label="Previous"></div>
       <div class="swiper-button-next" aria-label="Next"></div>
-      <div class="swiper-pagination"></div>
+      <!-- no pagination dots -->
     </div>
   </div>
 
@@ -114,6 +106,9 @@
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
   <script>
+    // Change this if you want to allow showing future-dated items N days ahead (e.g., 2).
+    const SHOW_AHEAD_DAYS = 0; // keep 0 to hide future items until their date
+
     const cacheBuster = 'ts=' + Date.now();
 
     fetch('recognitions.json?' + cacheBuster, { cache: 'no-store' })
@@ -121,11 +116,12 @@
       .then(items => {
         const now = stripTime(new Date());
         const oneMonthAgo = stripTime(addMonths(now, -1));
+        const showUntil = stripTime(addDays(now, SHOW_AHEAD_DAYS));
 
-        // Filter window: last month only, and no future items
+        // Filter: last month only, and not beyond SHOW_AHEAD_DAYS into the future
         const data = (items || [])
           .map(x => ({ ...x, _date: parseISO(x.date) }))
-          .filter(x => x._date && x._date >= oneMonthAgo && x._date <= now)
+          .filter(x => x._date && x._date >= oneMonthAgo && x._date <= showUntil)
           .sort((a,b) => (b._date?.getTime()||0) - (a._date?.getTime()||0));
 
         if (!data.length){
@@ -161,18 +157,23 @@
         const swiper = new Swiper('.swiper', {
           slidesPerView: 1,
           spaceBetween: 16,
-          loop: false,
+          loop: true,                         // loop like birthdays
           centeredSlides: false,
           autoHeight: true,                   // grows to fit expanded text
-          pagination: { el: '.swiper-pagination', clickable: true },
+          autoplay: {
+            delay: 3500,                      // auto-advance
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true
+          },
           navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+          // no pagination (radio dots)
           breakpoints: {
             720: { slidesPerView: 2, spaceBetween: 18 },
             1024:{ slidesPerView: 3, spaceBetween: 20 }
           }
         });
 
-        // Wire up expand/collapse and re-measure height
+        // Expand/collapse and re-measure height
         document.querySelectorAll('.js-toggle').forEach(btn => {
           btn.addEventListener('click', (e) => {
             const p = e.currentTarget.closest('.card').querySelector('.message');
@@ -205,6 +206,7 @@
     }
     function stripTime(d){ const t=new Date(d); t.setHours(0,0,0,0); return t; }
     function addMonths(d,n){ const t=new Date(d); t.setMonth(t.getMonth()+n); return t; }
+    function addDays(d,n){ const t=new Date(d); t.setDate(t.getDate()+n); return t; }
   </script>
 </body>
 </html>
