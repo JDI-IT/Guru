@@ -35,7 +35,7 @@
   .wrap{ max-width:100%; padding:8px; }
   .inner{ max-width:920px; margin:0 auto; }
 
-  /* Search bar only (title removed as requested) */
+  /* Search bar only (no title) */
   .bar{
     display:flex; justify-content:flex-end; align-items:center; gap:8px;
     margin:6px 0 8px;
@@ -45,7 +45,7 @@
     padding:10px 12px; font-size:14px; min-width:240px;
   }
 
-  /* Scroller that shows 2 cards with snap */
+  /* Scroller showing exactly N cards with snap */
   .scroller{
     height: var(--scroller-h);
     overflow-y: auto;
@@ -55,8 +55,7 @@
     display: grid;
     gap: var(--gap);
   }
-
-  /* Hide scrollbar (keeps mousewheel/touch scroll) */
+  /* keep a subtle thin scrollbar */
   .scroller::-webkit-scrollbar{ width:8px }
   .scroller::-webkit-scrollbar-thumb{ background:#2a2b2f; border-radius:999px }
   .scroller{ scrollbar-width:thin; scrollbar-color:#2a2b2f transparent }
@@ -126,14 +125,28 @@
   fetch('announcements.json?' + cacheBuster, { cache: 'no-store' })
     .then(r => { if(!r.ok) throw new Error('announcements.json not found'); return r.json(); })
     .then(items => {
-      all = (items || []).map(x => ({
-        title: String(x.title || '').trim(),
-        date: x.date ? new Date(x.date) : null,
-        dateText: x.date || '',
-        summary: String(x.summary || '').trim(),
-        url: String(x.url || '#').trim(),
-        tag: String(x.tag || '').trim()
-      })).sort((a,b) => (b.date?.getTime()||0) - (a.date?.getTime()||0));
+      // Date window: last 1 month (inclusive), up to today
+      const now = new Date();
+      const oneMonthAgo = new Date(now);
+      oneMonthAgo.setMonth(now.getMonth() - 1);
+
+      all = (items || [])
+        // filter out older than 1 month
+        .filter(x => {
+          const d = parseISO(x.date);
+          return d && d >= stripTime(oneMonthAgo) && d <= stripTime(now);
+        })
+        // normalize
+        .map(x => ({
+          title: String(x.title || '').trim(),
+          date: parseISO(x.date),
+          dateText: x.date || '',
+          summary: String(x.summary || '').trim(),
+          url: String(x.url || '#').trim(),
+          tag: String(x.tag || '').trim()
+        }))
+        // newest first
+        .sort((a,b) => (b.date?.getTime()||0) - (a.date?.getTime()||0));
 
       filtered = all.slice();
       render();
@@ -166,7 +179,21 @@
     `;
   }
 
+  // Helpers
   function esc(s){ return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;'); }
+
+  // Robust ISO date parsing for 'YYYY-MM-DD'
+  function parseISO(v){
+    if(!v) return null;
+    // Force midnight local to avoid TZ drift
+    const d = new Date(v + 'T00:00:00');
+    return isNaN(d.getTime()) ? null : d;
+  }
+  function stripTime(d){
+    const t = new Date(d);
+    t.setHours(0,0,0,0);
+    return t;
+    }
 
   // search
   q.addEventListener('input', () => {
