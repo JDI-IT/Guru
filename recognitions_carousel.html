@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Recognitions Carousel</title>
+
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+
+  <style>
+    :root{
+      --page-bg:#0b0c0f;
+      --card-bg:#ffffff;
+      --text:#171717;
+      --muted:#5f6368;
+      --ring:#e5e7eb;
+      --accent:#111827;
+      --brand:#111827;
+      --radius:16px;
+      --shadow:0 12px 28px rgba(0,0,0,.20);
+    }
+
+    *{ box-sizing:border-box }
+    html,body{
+      margin:0; background:var(--page-bg); color:var(--text);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+    }
+
+    .wrap{ max-width:1100px; margin:18px auto; padding:0 12px; }
+
+    /* Swiper container */
+    .swiper{
+      width:100%;
+      padding:8px 6px 32px;
+    }
+
+    /* Card (slide) */
+    .swiper-slide{
+      height:auto;                       /* allow autoHeight to size per slide */
+      display:flex;
+    }
+    .card{
+      background:var(--card-bg);
+      border:1px solid var(--ring);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px clamp(14px,3vw,22px);
+      display:grid;
+      grid-template-columns: 112px 1fr;
+      gap:16px;
+      align-items:start;
+      width:100%;
+    }
+    @media (max-width:720px){
+      .card{ grid-template-columns: 1fr; text-align:center; }
+    }
+
+    .avatar{
+      width:112px; height:112px; border-radius:12px;
+      object-fit:cover; object-position:center;
+      border:1px solid var(--ring);
+      background:#f4f4f5;
+      justify-self:center;
+    }
+
+    .name{ font-size:18px; font-weight:900; color:var(--accent); margin:2px 0 6px; }
+    .meta{ font-size:12px; color:var(--muted); margin-bottom:8px; }
+    .message{ font-size:14px; line-height:1.65; margin:0; }
+
+    /* Clamp + read more */
+    .clamp{
+      display:-webkit-box;
+      -webkit-line-clamp:4;
+      -webkit-box-orient:vertical;
+      overflow:hidden;
+    }
+    .btn-link{
+      display:inline-flex; gap:8px; align-items:center;
+      font-size:13px; font-weight:800; color:var(--brand);
+      background:transparent; border:none; cursor:pointer; padding:8px 0;
+    }
+    @media (max-width:720px){ .btn-link{ justify-content:center; } }
+
+    /* Swiper controls */
+    .swiper-button-prev, .swiper-button-next{
+      color:#fff; background:rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.35);
+      width:30px; height:30px; border-radius:999px;
+    }
+    .swiper-button-prev:after, .swiper-button-next:after{ font-size:16px; }
+    .swiper-pagination-bullet{ background:#fff; opacity:.35 }
+    .swiper-pagination-bullet-active{ opacity:1 }
+
+    /* Empty state */
+    .empty{ color:#fff; opacity:.85; text-align:center; padding:28px 0 }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div id="empty" class="empty" style="display:none;">No recognitions yet.</div>
+
+    <div class="swiper" id="swiperRoot" style="display:none;">
+      <div class="swiper-wrapper" id="slides"></div>
+
+      <div class="swiper-button-prev" aria-label="Previous"></div>
+      <div class="swiper-button-next" aria-label="Next"></div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </div>
+
+  <!-- Swiper JS -->
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+  <script>
+    const cacheBuster = 'ts=' + Date.now();
+
+    fetch('recognitions.json?' + cacheBuster, { cache: 'no-store' })
+      .then(r => { if(!r.ok) throw new Error('recognitions.json not found'); return r.json(); })
+      .then(items => {
+        const now = stripTime(new Date());
+        const oneMonthAgo = stripTime(addMonths(now, -1));
+
+        // Filter window: last month only, and no future items
+        const data = (items || [])
+          .map(x => ({ ...x, _date: parseISO(x.date) }))
+          .filter(x => x._date && x._date >= oneMonthAgo && x._date <= now)
+          .sort((a,b) => (b._date?.getTime()||0) - (a._date?.getTime()||0));
+
+        if (!data.length){
+          document.getElementById('empty').style.display = 'block';
+          return;
+        }
+
+        const wrapper = document.getElementById('slides');
+        data.forEach(x => {
+          const img = x.photo || 'https://via.placeholder.com/256?text=Photo';
+          const name = x.name ? `👏 ${escapeHtml(x.name)}` : '👏 Teammate';
+          const meta = [x.department, x.date].filter(Boolean).join(' • ');
+          const msg = escapeHtml(x.message || '');
+
+          const slide = document.createElement('div');
+          slide.className = 'swiper-slide';
+          slide.innerHTML = `
+            <article class="card">
+              <img class="avatar" src="${img}" alt="Headshot of ${escapeHtml(x.name || 'Teammate')}" loading="lazy">
+              <div>
+                <h3 class="name">${name}</h3>
+                <div class="meta">${escapeHtml(meta)}</div>
+                <p class="message clamp">${msg}</p>
+                <button class="btn-link js-toggle" type="button">Read more</button>
+              </div>
+            </article>
+          `;
+          wrapper.appendChild(slide);
+        });
+
+        document.getElementById('swiperRoot').style.display = 'block';
+
+        const swiper = new Swiper('.swiper', {
+          slidesPerView: 1,
+          spaceBetween: 16,
+          loop: false,
+          centeredSlides: false,
+          autoHeight: true,                   // grows to fit expanded text
+          pagination: { el: '.swiper-pagination', clickable: true },
+          navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+          breakpoints: {
+            720: { slidesPerView: 2, spaceBetween: 18 },
+            1024:{ slidesPerView: 3, spaceBetween: 20 }
+          }
+        });
+
+        // Wire up expand/collapse and re-measure height
+        document.querySelectorAll('.js-toggle').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const p = e.currentTarget.closest('.card').querySelector('.message');
+            const clamped = p.classList.toggle('clamp');
+            e.currentTarget.textContent = clamped ? 'Read more' : 'Show less';
+            swiper.updateAutoHeight(300);
+          });
+        });
+      })
+      .catch(err => {
+        console.error(err);
+        const empty = document.getElementById('empty');
+        empty.style.display = 'block';
+        empty.textContent = '⚠️ Could not load recognitions.json';
+      });
+
+    // Helpers
+    function escapeHtml(str){
+      return String(str || '')
+        .replaceAll('&','&amp;')
+        .replaceAll('<','&lt;')
+        .replaceAll('>','&gt;')
+        .replaceAll('"','&quot;')
+        .replaceAll("'",'&#39;');
+    }
+    function parseISO(v){
+      if(!v) return null;
+      const d = new Date(v + 'T00:00:00'); // local midnight
+      return isNaN(d.getTime()) ? null : stripTime(d);
+    }
+    function stripTime(d){ const t=new Date(d); t.setHours(0,0,0,0); return t; }
+    function addMonths(d,n){ const t=new Date(d); t.setMonth(t.getMonth()+n); return t; }
+  </script>
+</body>
+</html>
