@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Richard Starkey",
+    "message": "As we close this week out, I want to recognize the incredible work happening across the entire JDI team. A big win came from the Finance Team getting our financial packets in order and moving conversations forward with partners. Grateful for this team and excited for what’s ahead.",
+    "photo": "images/richard.jpg",
+    "date": "2025-11-08",
+    "department": "Finance",
+    "tag": "Weekly Spotlight"
+  },
+  {
+    "name": "Louis Atouguia",
+    "message": "Wins like this are only possible because of the dedication of supporting staff across compliance, admin, and operations—thank you for keeping the machine turning day in and day out.",
+    "photo": "images/louis.jpg",
+    "date": "2025-11-07",
+    "department": "Finance",
+    "tag": "Teamwork"
+  },
+  {
+    "name": "Amanda Lee",
+    "message": "Delivered a complex proposal under a tight deadline while coordinating across three time zones. Outstanding ownership and communication.",
+    "photo": "https://via.placeholder.com/256?text=Photo",
+    "date": "2025-11-05",
+    "department": "BD",
+    "tag": "Ownership"
+  },
+  {
+    "name": "Ryan Chen",
+    "message": "Proactively documented the integration handoff so the next project could start smoothly—great enablement for the whole team.",
+    "photo": "https://via.placeholder.com/256?text=Photo",
+    "date": "2025-11-03",
+    "department": "Engineering",
+    "tag": "Enablement"
+  },
+  {
+    "name": "Priya Nair",
+    "message": "Jumped in to unblock a customer deployment and stayed late to ensure a clean cutover. Customer called it out as “exceptional support.”",
+    "photo": "https://via.placeholder.com/256?text=Photo",
+    "date": "2025-11-02",
+    "department": "Support",
+    "tag": "Customer Obsession"
+  },
+  {
+    "name": "Jason Miller",
+    "message": "Introduced a lightweight QA checklist that reduced regressions by 30% this week. Nice measurable impact!",
+    "photo": "https://via.placeholder.com/256?text=Photo",
+    "date": "2025-10-30",
+    "department": "QA",
+    "tag": "Quality"
+  }
+]
