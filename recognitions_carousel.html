@@ -10,12 +10,12 @@
 
   <style>
     :root{
-      --page-bg: transparent;  /* ✅ transparent background */
+      --page-bg: transparent;  /* transparent so it blends with Guru */
       --card-bg:#ffffff;
       --text:#171717;
       --muted:#5f6368;
       --ring:#e5e7eb;
-      --accent:#111827;
+      --accent:#111827;  /* arrow/icon/text accent */
       --brand:#111827;
       --radius:16px;
       --shadow:0 12px 28px rgba(0,0,0,.15);
@@ -35,6 +35,7 @@
 
     /* Slides */
     .swiper-slide{ height:auto; display:flex; background:transparent; }
+
     .card{
       background:var(--card-bg);
       border:1px solid var(--ring);
@@ -42,7 +43,7 @@
       box-shadow:var(--shadow);
       padding:18px clamp(14px,3vw,22px);
       display:grid;
-      grid-template-columns: 112px 1fr;
+      grid-template-columns: 112px 1fr;  /* photo + text */
       gap:16px;
       align-items:start;
       width:100%;
@@ -77,26 +78,35 @@
     }
     @media (max-width:720px){ .btn-link{ justify-content:center; } }
 
-    /* ✅ Arrow buttons - smaller, dark, subtle */
+    /* ✅ Option B: Text-only layout when no photo is provided */
+    .card.no-photo{
+      grid-template-columns: 1fr;   /* single column */
+      text-align: center;
+      justify-items: center;
+      padding: 24px 20px;
+    }
+    .card.no-photo .name{ font-size:20px; }
+    .card.no-photo .message{ max-width:70ch; }
+
+    /* ✅ Arrows only (smaller, dark, no background) */
     .swiper-button-prev, .swiper-button-next{
       color: var(--accent);
-      background: rgba(255,255,255,0);  /* fully transparent */
-      width: 15px;   /* half original size */
+      background: transparent;
+      width: 15px;   /* half size */
       height: 15px;
-      transform: scale(0.75);
       border: none;
     }
     .swiper-button-prev:after, .swiper-button-next:after{
       font-size: 12px;  /* smaller arrow icon */
     }
     .swiper-button-prev:hover, .swiper-button-next:hover{
-      color: #444;  /* slight hover contrast */
+      color: #444;  /* subtle hover contrast */
     }
 
-    /* Remove pagination dots */
+    /* No pagination dots */
     .swiper-pagination{ display:none; }
 
-    /* Empty */
+    /* Empty state */
     .empty{ color:#111; opacity:.85; text-align:center; padding:28px 0 }
   </style>
 </head>
@@ -116,7 +126,8 @@
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
   <script>
-    const SHOW_AHEAD_DAYS = 0; // hide future items until their date
+    // 0 = hide future items until their date; set >0 to preview N days ahead
+    const SHOW_AHEAD_DAYS = 0;
 
     const cacheBuster = 'ts=' + Date.now();
 
@@ -127,6 +138,7 @@
         const oneMonthAgo = stripTime(addMonths(now, -1));
         const showUntil = stripTime(addDays(now, SHOW_AHEAD_DAYS));
 
+        // Filter: last month only, not beyond SHOW_AHEAD_DAYS into the future
         const data = (items || [])
           .map(x => ({ ...x, _date: parseISO(x.date) }))
           .filter(x => x._date && x._date >= oneMonthAgo && x._date <= showUntil)
@@ -138,17 +150,25 @@
         }
 
         const wrapper = document.getElementById('slides');
+
         data.forEach(x => {
-          const img = x.photo || 'https://via.placeholder.com/256?text=Photo';
           const name = x.name ? `👏 ${escapeHtml(x.name)}` : '👏 Teammate';
           const meta = [x.department, x.date].filter(Boolean).join(' • ');
           const msg = escapeHtml(x.message || '');
 
+          // ✅ Only include image block if photo is provided
+          const hasPhoto = !!x.photo;
+          const imgBlock = hasPhoto
+            ? `<img class="avatar" src="${x.photo}" alt="Headshot of ${escapeHtml(x.name || 'Teammate')}" loading="lazy">`
+            : '';
+
+          const cardClass = hasPhoto ? 'card' : 'card no-photo';
+
           const slide = document.createElement('div');
           slide.className = 'swiper-slide';
           slide.innerHTML = `
-            <article class="card">
-              <img class="avatar" src="${img}" alt="Headshot of ${escapeHtml(x.name || 'Teammate')}" loading="lazy">
+            <article class="${cardClass}">
+              ${imgBlock}
               <div>
                 <h3 class="name">${name}</h3>
                 <div class="meta">${escapeHtml(meta)}</div>
@@ -174,12 +194,14 @@
             pauseOnMouseEnter: true
           },
           navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+          // Responsive counts
           breakpoints: {
             720: { slidesPerView: 2, spaceBetween: 18 },
             1024:{ slidesPerView: 3, spaceBetween: 20 }
           }
         });
 
+        // Expand/collapse + re-measure height
         document.querySelectorAll('.js-toggle').forEach(btn => {
           btn.addEventListener('click', (e) => {
             const p = e.currentTarget.closest('.card').querySelector('.message');
@@ -207,7 +229,7 @@
     }
     function parseISO(v){
       if(!v) return null;
-      const d = new Date(v + 'T00:00:00');
+      const d = new Date(v + 'T00:00:00'); // local midnight
       return isNaN(d.getTime()) ? null : stripTime(d);
     }
     function stripTime(d){ const t=new Date(d); t.setHours(0,0,0,0); return t; }
