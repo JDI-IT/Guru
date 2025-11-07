@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Announcements</title>
+
+<style>
+  :root{
+    --page-bg:#0b0c0f;       /* dark page */
+    --card-bg:#fff;          /* white cards */
+    --text:#171717;
+    --muted:#5f6368;
+    --ring:#e5e7eb;
+    --accent:#111827;
+    --brand:#111827;         /* link/button color */
+    --radius:16px;
+    --shadow:0 12px 28px rgba(0,0,0,.20);
+  }
+
+  *{ box-sizing:border-box }
+  html,body{
+    margin:0; background:var(--page-bg); color:var(--text);
+    font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+  }
+
+  .wrap{ max-width:100%; padding:8px; }
+  .inner{ max-width:920px; margin:12px auto; }
+
+  /* Header */
+  .head{
+    display:flex; gap:10px; align-items:center; justify-content:space-between;
+    color:#fff; margin:0 0 10px;
+  }
+  .head h2{ margin:0; font-size:18px; font-weight:800 }
+  .filters{
+    display:flex; gap:8px; align-items:center; flex-wrap:wrap;
+  }
+  .search{
+    background:#fff; border:1px solid var(--ring); border-radius:10px;
+    padding:8px 10px; font-size:14px; min-width:220px;
+  }
+
+  /* List */
+  .list{
+    display:grid; gap:14px;
+  }
+  .card{
+    background:var(--card-bg); border:1px solid var(--ring);
+    border-radius:var(--radius); box-shadow:var(--shadow);
+    padding:14px 16px;
+    display:grid; grid-template-columns:1fr auto; gap:8px 16px;
+    align-items:center;
+  }
+  .meta{
+    font-size:12px; color:var(--muted);
+  }
+  .title{
+    font-weight:800; font-size:16px; color:var(--accent); margin:2px 0 4px;
+  }
+  .summary{
+    font-size:14px; color:var(--text); margin:0; line-height:1.55;
+  }
+  .tag{
+    font-size:11px; padding:4px 8px; border:1px solid var(--ring);
+    border-radius:999px; color:#333; background:#fafafa; display:inline-block;
+  }
+
+  .cta{
+    justify-self:end; align-self:center;
+  }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:13px; font-weight:700; color:#fff;
+    background:var(--brand); border-radius:10px;
+    padding:10px 12px; text-decoration:none; white-space:nowrap;
+  }
+  .btn:hover{ filter:brightness(1.05) }
+  .btn:active{ transform:translateY(1px) }
+
+  /* Pagination (optional “Load more”) */
+  .pager{
+    display:flex; justify-content:center; margin:8px 0 4px;
+  }
+  .more{
+    border:1px solid var(--ring); background:#fff; color:#111;
+    padding:10px 14px; border-radius:10px; cursor:pointer; font-weight:700;
+  }
+
+  /* Empty */
+  .empty{ color:#fff; opacity:.85; text-align:center; padding:24px 0 }
+
+  @media (max-width:680px){
+    .card{ grid-template-columns:1fr; }
+    .cta{ justify-self:stretch }
+    .btn{ width:100%; justify-content:center }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap"><div class="inner">
+    <div class="head">
+      <h2>📣 Recent Announcements</h2>
+      <div class="filters">
+        <input id="q" class="search" type="search" placeholder="Search announcements..." />
+      </div>
+    </div>
+
+    <div id="empty" class="empty" style="display:none">No announcements yet.</div>
+    <div id="list" class="list"></div>
+    <div id="pager" class="pager" style="display:none">
+      <button id="loadMore" class="more">Load more</button>
+    </div>
+  </div></div>
+
+<script>
+  const PAGE_SIZE = 6;            // show 6, then “Load more”
+  const cacheBuster = 'ts=' + Date.now();
+  let all = [], filtered = [], page = 1;
+
+  const listEl = document.getElementById('list');
+  const emptyEl = document.getElementById('empty');
+  const pagerEl = document.getElementById('pager');
+  const loadMoreBtn = document.getElementById('loadMore');
+  const q = document.getElementById('q');
+
+  fetch('announcements.json?' + cacheBuster, { cache: 'no-store' })
+    .then(r => { if(!r.ok) throw new Error('announcements.json not found'); return r.json(); })
+    .then(items => {
+      // normalize + sort by date desc
+      all = (items || []).map(x => ({
+        title: String(x.title || '').trim(),
+        date: x.date ? new Date(x.date) : null,
+        dateText: x.date || '',
+        summary: String(x.summary || '').trim(),
+        url: String(x.url || '#').trim(),
+        tag: String(x.tag || '').trim()
+      })).sort((a,b) => (b.date?.getTime()||0) - (a.date?.getTime()||0));
+
+      filtered = all.slice();
+      render(true);
+    })
+    .catch(err => {
+      console.error(err);
+      emptyEl.style.display = 'block';
+      emptyEl.textContent = '⚠️ Could not load announcements.json';
+    });
+
+  function render(reset=false){
+    if (reset){
+      listEl.innerHTML = ''; page = 1;
+    }
+    const start = 0, end = PAGE_SIZE * page;
+    const slice = filtered.slice(start, end);
+
+    emptyEl.style.display = slice.length ? 'none' : 'block';
+
+    listEl.innerHTML = slice.map(cardHtml).join('');
+
+    // pager
+    if (filtered.length > end){
+      pagerEl.style.display = 'flex';
+    } else {
+      pagerEl.style.display = 'none';
+    }
+  }
+
+  function cardHtml(x){
+    const safeTitle = esc(x.title);
+    const safeSummary = esc(x.summary);
+    const safeTag = esc(x.tag);
+    const date = x.dateText ? ` • ${esc(x.dateText)}` : '';
+    const tag = safeTag ? `<span class="tag">${safeTag}</span>` : '';
+
+    return `
+      <article class="card">
+        <div>
+          <div class="meta">${tag}${date}</div>
+          <h3 class="title">${safeTitle}</h3>
+          <p class="summary">${safeSummary}</p>
+        </div>
+        <div class="cta">
+          <a class="btn" href="${x.url}" target="_blank" rel="noopener">View more</a>
+        </div>
+      </article>
+    `;
+  }
+
+  function esc(s){ return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;'); }
+
+  // search
+  q.addEventListener('input', () => {
+    const term = q.value.trim().toLowerCase();
+    filtered = !term ? all.slice() : all.filter(x =>
+      x.title.toLowerCase().includes(term) ||
+      x.summary.toLowerCase().includes(term) ||
+      x.tag.toLowerCase().includes(term)
+    );
+    render(true);
+  });
+
+  // pager
+  loadMoreBtn.addEventListener('click', () => {
+    page += 1;
+    render(false);
+  });
+</script>
+</body>
+</html>
