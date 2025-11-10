@@ -100,56 +100,42 @@
     }
 
     .message{
-      font-size:13px; line-height:1.55;
-      margin:0;
+      font-size:13px; line-height:1.55; margin:0;
       display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;
     }
+    .message.expanded{
+      display:block; -webkit-line-clamp:unset; overflow:visible;
+    }
 
-    /* See more */
-    .actions{
-      display:flex;
-      justify-content:flex-end;
-      margin-top:10px;
-    }
-    .actions a{
+    /* Read more button (same style language as recognitions) */
+    .btn-link{
+      display:inline-flex; gap:8px; align-items:center;
       font-size:12px; font-weight:800; color:var(--link);
-      text-decoration:none;
-      padding:6px 10px;
-      border:1px solid var(--ring);
-      border-radius:999px;
-      background:#fff;
+      background:transparent; border:none; cursor:pointer; padding:6px 0 0;
     }
-    .actions a:hover{ background:#f8f8f8; }
+    @media (max-width:740px){ .btn-link{ justify-content:center; width:100%; } }
   </style>
 </head>
 <body>
   <div class="wrap">
     <!-- Grid -->
     <section id="grid" class="grid"></section>
-
-    <!-- See more (edit the href to your Guru card or full page) -->
-    <div class="actions">
-      <a id="seeMore" href="https://jdi-it.github.io/Guru/new_hires.html" target="_blank" rel="noopener">See more</a>
-    </div>
   </div>
 
   <script>
     const cacheBuster = 'ts=' + Date.now();
-    // Optional: point this to your Guru card URL if you have one
-    const MORE_URL = 'https://jdi-it.github.io/Guru/new_hires.html';
-    document.getElementById('seeMore').href = MORE_URL;
 
     fetch('new_hires.json?' + cacheBuster, { cache: 'no-store' })
       .then(r => { if(!r.ok) throw new Error('new_hires.json not found'); return r.json(); })
       .then(items => {
         if (!items || !items.length) return;
 
-        // Sort by start_date ASC, then take the last 3 so we have chronological left→right
+        // Oldest → newest, keep only the most recent 3, so newest appears on the RIGHT
         const latestChrono = items
           .map(x => ({ ...x, _date: x.start_date ? new Date(x.start_date + 'T00:00:00') : null }))
-          .filter(x => x._date)                       // keep valid dates
-          .sort((a,b) => (a._date - b._date))         // oldest → newest
-          .slice(-3);                                  // keep the MOST RECENT 3, but preserve ASC order
+          .filter(x => x._date)
+          .sort((a,b) => (a._date - b._date))   // ascending
+          .slice(-3);
 
         renderGrid(latestChrono);
       })
@@ -159,13 +145,17 @@
       const grid = document.getElementById('grid');
       if (!list || !list.length) return;
 
-      grid.innerHTML = list.map(x => {
+      grid.innerHTML = list.map((x, idx) => {
         const hasPhoto = !!x.photo;
         const img = hasPhoto ? `<img class="avatar" src="${escapeHtml(x.photo)}" alt="Headshot of ${escapeHtml(x.name || 'New Hire')}" loading="lazy">` : '';
         const cls = hasPhoto ? 'card' : 'card no-photo';
         const name = x.name ? `🎉 ${escapeHtml(x.name)}` : '🎉 New teammate';
         const metaBits = [x.role, x.department, x.start_date].filter(Boolean).map(escapeHtml).join(' • ');
         const intro = escapeHtml(x.intro || '');
+
+        // Button ID per card for toggling
+        const msgId = `msg-${idx}`;
+        const btnId = `btn-${idx}`;
 
         return `
           <article class="${cls}">
@@ -174,11 +164,24 @@
               <div class="tagline">New Hire</div>
               <h3 class="name">${name}</h3>
               <div class="meta">${metaBits}</div>
-              <p class="message">${intro}</p>
+              <p id="${msgId}" class="message">${intro}</p>
+              <button id="${btnId}" class="btn-link" type="button" aria-controls="${msgId}">Read more</button>
             </div>
           </article>
         `;
       }).join('');
+
+      // Wire up all "Read more" toggles
+      list.forEach((_, idx) => {
+        const btn = document.getElementById(`btn-${idx}`);
+        const msg = document.getElementById(`msg-${idx}`);
+        if (!btn || !msg) return;
+
+        btn.addEventListener('click', () => {
+          const expanded = msg.classList.toggle('expanded');
+          btn.textContent = expanded ? 'Show less' : 'Read more';
+        });
+      });
     }
 
     function escapeHtml(str){
