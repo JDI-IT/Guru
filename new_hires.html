@@ -7,15 +7,14 @@
 
   <style>
     :root{
-      --page-bg:#0b0c0f;         /* page background (change to transparent if you prefer) */
-      --card-bg:#ffffff;         /* white cards */
-      --text:#171717;            /* body text */
-      --muted:#5f6368;           /* muted text */
-      --ring:#e5e7eb;            /* borders */
-      --accent:#111827;          /* titles */
-      --shadow: 0 12px 28px rgba(0,0,0,.20);
+      --page-bg: transparent;     /* make transparent for Guru embed */
+      --card-bg:#ffffff;
+      --text:#171717;
+      --muted:#5f6368;
+      --ring:#e5e7eb;
+      --accent:#111827;
+      --shadow: 0 8px 20px rgba(0,0,0,.12);
       --radius: 16px;
-      --brand:#111827;
     }
 
     *{ box-sizing:border-box }
@@ -26,32 +25,30 @@
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden;
     }
 
     .wrap{
-      max-width:1100px;
-      margin:24px auto 28px;
-      padding:0 16px;
+      max-width:950px;            /* reduced width */
+      margin:0 auto;
+      padding:0 8px;
     }
 
-    .section-title{
-      color:#fff;
-      font-size:20px;
-      font-weight:800;
-      margin:0 0 14px 4px;
-      display:flex; align-items:center; gap:8px;
-    }
+    /* Remove title completely */
+    .section-title{ display:none; }
 
-    /* ---------- 3-up Grid (latest only) ---------- */
+    /* ---------- 3-up Grid ---------- */
     .grid{
       display:grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));  /* 3 across */
-      gap:22px;
+      grid-template-columns: repeat(3, 1fr);
+      gap:16px;
+      justify-content:center;
+      align-items:start;
     }
-    @media (max-width: 980px){
-      .grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    @media (max-width: 900px){
+      .grid{ grid-template-columns: repeat(2, 1fr); }
     }
-    @media (max-width: 680px){
+    @media (max-width: 640px){
       .grid{ grid-template-columns: 1fr; }
     }
 
@@ -60,18 +57,21 @@
       border:1px solid var(--ring);
       border-radius:var(--radius);
       box-shadow:var(--shadow);
-      padding:20px clamp(14px, 3vw, 24px);
+      padding:16px 14px;
       display:grid;
-      grid-template-columns: 112px 1fr;       /* photo + text */
-      gap:16px;
+      grid-template-columns: 90px 1fr;  /* smaller photo */
+      gap:12px;
       align-items:start;
+      transition:transform .15s ease;
     }
+    .card:hover{ transform:translateY(-2px); }
+
     @media (max-width:740px){
       .card{ grid-template-columns: 1fr; text-align:center; }
     }
 
     .card .avatar{
-      width:112px; height:112px; border-radius:12px;
+      width:90px; height:90px; border-radius:10px;
       object-fit:cover; object-position:center;
       border:1px solid var(--ring);
       background:#f4f4f5;
@@ -79,37 +79,35 @@
     }
 
     .card.no-photo{
-      grid-template-columns: 1fr;             /* text-only layout if no photo */
-      text-align:center; justify-items:center;
-      padding:24px 20px;
+      grid-template-columns: 1fr;
+      text-align:center;
+      justify-items:center;
+      padding:20px 14px;
     }
 
-    .card .name{
-      font-size:18px; font-weight:900; color:var(--accent); margin:2px 0 6px;
+    .name{
+      font-size:16px; font-weight:900; color:var(--accent); margin:2px 0 6px;
     }
 
     .tagline{
-      font-size:12px; color:#7c3aed; font-weight:800; letter-spacing:.02em;
-      text-transform:uppercase; margin:0 0 6px;
+      font-size:11px; color:#7c3aed; font-weight:800; letter-spacing:.02em;
+      text-transform:uppercase; margin:0 0 4px;
     }
 
-    .meta{ font-size:12px; color:var(--muted); margin-bottom:8px; }
+    .meta{
+      font-size:11px; color:var(--muted); margin-bottom:6px;
+    }
 
     .message{
-      font-size:14px; line-height:1.65;
-      max-width:62ch; margin:0;
-      display:-webkit-box; -webkit-line-clamp:4; -webkit-box-orient:vertical; overflow:hidden;
+      font-size:13px; line-height:1.55;
+      margin:0;
+      display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;
     }
-
-    /* Subtle hover lift */
-    .card:hover{ transform:translateY(-1px); transition:transform .15s ease; }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <div class="section-title">👋 Welcome, New Hires!</div>
-
-    <!-- 3-up grid -->
+    <!-- Removed title -->
     <section id="grid" class="grid"></section>
   </div>
 
@@ -121,7 +119,6 @@
       .then(items => {
         if (!items || !items.length) return;
 
-        // Sort by start date desc, then take latest 3
         const latest = items
           .map(x => ({
             ...x,
