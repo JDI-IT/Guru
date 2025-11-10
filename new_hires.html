@@ -7,7 +7,7 @@
 
   <style>
     :root{
-      --page-bg: transparent;     /* make transparent for Guru embed */
+      --page-bg: transparent;     /* transparent for Guru embed */
       --card-bg:#ffffff;
       --text:#171717;
       --muted:#5f6368;
@@ -15,6 +15,7 @@
       --accent:#111827;
       --shadow: 0 8px 20px rgba(0,0,0,.12);
       --radius: 16px;
+      --link:#111827;
     }
 
     *{ box-sizing:border-box }
@@ -29,12 +30,12 @@
     }
 
     .wrap{
-      max-width:950px;            /* reduced width */
+      max-width:950px;            /* compact to fit 3 cards in a row */
       margin:0 auto;
-      padding:0 8px;
+      padding:0 8px 6px;
     }
 
-    /* Remove title completely */
+    /* Title is intentionally removed */
     .section-title{ display:none; }
 
     /* ---------- 3-up Grid ---------- */
@@ -103,31 +104,54 @@
       margin:0;
       display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;
     }
+
+    /* See more */
+    .actions{
+      display:flex;
+      justify-content:flex-end;
+      margin-top:10px;
+    }
+    .actions a{
+      font-size:12px; font-weight:800; color:var(--link);
+      text-decoration:none;
+      padding:6px 10px;
+      border:1px solid var(--ring);
+      border-radius:999px;
+      background:#fff;
+    }
+    .actions a:hover{ background:#f8f8f8; }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <!-- Removed title -->
+    <!-- Grid -->
     <section id="grid" class="grid"></section>
+
+    <!-- See more (edit the href to your Guru card or full page) -->
+    <div class="actions">
+      <a id="seeMore" href="https://jdi-it.github.io/Guru/new_hires.html" target="_blank" rel="noopener">See more</a>
+    </div>
   </div>
 
   <script>
     const cacheBuster = 'ts=' + Date.now();
+    // Optional: point this to your Guru card URL if you have one
+    const MORE_URL = 'https://jdi-it.github.io/Guru/new_hires.html';
+    document.getElementById('seeMore').href = MORE_URL;
 
     fetch('new_hires.json?' + cacheBuster, { cache: 'no-store' })
       .then(r => { if(!r.ok) throw new Error('new_hires.json not found'); return r.json(); })
       .then(items => {
         if (!items || !items.length) return;
 
-        const latest = items
-          .map(x => ({
-            ...x,
-            _date: x.start_date ? new Date(x.start_date + 'T00:00:00') : null
-          }))
-          .sort((a,b) => (b._date?.getTime()||0) - (a._date?.getTime()||0))
-          .slice(0, 3);
+        // Sort by start_date ASC, then take the last 3 so we have chronological left→right
+        const latestChrono = items
+          .map(x => ({ ...x, _date: x.start_date ? new Date(x.start_date + 'T00:00:00') : null }))
+          .filter(x => x._date)                       // keep valid dates
+          .sort((a,b) => (a._date - b._date))         // oldest → newest
+          .slice(-3);                                  // keep the MOST RECENT 3, but preserve ASC order
 
-        renderGrid(latest);
+        renderGrid(latestChrono);
       })
       .catch(err => console.error(err));
 
