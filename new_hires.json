@@ -1,0 +1,34 @@
+[
+  {
+    "name": "Steve Perkins",
+    "role": "Program Manager",
+    "department": "Operations",
+    "start_date": "2025-11-06",
+    "photo": "https://jdi-it.github.io/Guru/images/steve-perkins.jpg",
+    "intro": "Steve joins JDI with 10+ years in defense programs and partner enablement. He’ll lead cross-functional delivery for key accounts."
+  },
+  {
+    "name": "Viktor Ivanov",
+    "role": "Systems Engineer",
+    "department": "Engineering",
+    "start_date": "2025-11-02",
+    "photo": "https://jdi-it.github.io/Guru/images/viktor-ivanov.jpg",
+    "intro": "Viktor specializes in unmanned systems and secure comms. Passionate about field deployments and rapid prototyping."
+  },
+  {
+    "name": "Stephanie Gaskins",
+    "role": "Account Executive",
+    "department": "Sales & BD",
+    "start_date": "2025-10-30",
+    "photo": "https://jdi-it.github.io/Guru/images/stephanie-g.png",
+    "intro": "From enterprise sales to government partnerships, Stephanie brings a customer-first mindset and energy to match!"
+  },
+  {
+    "name": "Jordan Krulik",
+    "role": "Solutions Architect",
+    "department": "Pre-Sales",
+    "start_date": "2025-10-25",
+    "photo": "",
+    "intro": "Jordan helps customers map mission goals to scalable technical architectures. Avid tinkerer and drone hobbyist."
+  }
+]
