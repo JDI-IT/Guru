@@ -1,30 +1,87 @@
 [
   {
     "title": "IT Request Form Migration",
-    "date": "2025-10-20",
+    "date": "2025-10-02",
     "summary": "We’re excited to announce that our Tool Access Request Form and IT Request Form have...",
     "url": "https://app.getguru.com/card/igyRxXnT/02OCT2025-IT-Request-Form-Migration",
     "tag": "Form"
   },
   {
-    "title": "Team Announcement – JDI 360° Performance Pilot",
-    "date": "2025-11-05",
-    "summary": "We’re launching the 360° Performance Evaluation Pilot. Expect an email with your evaluation list on Monday...",
-    "url": "https://app.getguru.com/card/yyyyyy",
-    "tag": "HR"
+    "title": "Monday.com Best Practices Reminder",
+    "date": "2025-10-15",
+    "summary": "Hi Team - To keep notifications focused and our boards accurate, please follow these guidelines...",
+    "url": "https://app.getguru.com/card/ToyjxyBc/15OCT2025-Mondaycom-Best-Practices-Reminder",
+    "tag": "Tools"
   },
   {
-    "title": "Team Announcement – JDI 360° Performance Pilot",
-    "date": "2025-11-05",
-    "summary": "We’re launching the 360° Performance Evaluation Pilot. Expect an email with your evaluation list on Monday...",
-    "url": "https://app.getguru.com/card/yyyyyy",
-    "tag": "HR"
+    "title": "Guru Rollout",
+    "date": "2025-10-17",
+    "summary": "We’re excited to announce the rollout of Guru, our new company knowledge base for policies...",
+    "url": "https://app.getguru.com/card/iGrLzAxT/17OCT2025-Guru-Rollout",
+    "tag": "Tools"
   },
   {
-    "title": "Team Announcement – JDI 360° Performance Pilot",
-    "date": "2025-11-05",
-    "summary": "We’re launching the 360° Performance Evaluation Pilot. Expect an email with your evaluation list on Monday...",
-    "url": "https://app.getguru.com/card/yyyyyy",
+    "title": "AWS Service Disruption – US-East-1 Region",
+    "date": "2025-10-20",
+    "summary": "Amazon Web Services (AWS) is currently experiencing issues in the US-East-1 region...",
+    "url": "https://app.getguru.com/card/TArkzd8c/20OCT2025-AWS-Service-Disruption-USEast1-Region",
+    "tag": "IT"
+  },
+   {
+    "title": "Clocks Changing Soon!",
+    "date": "2025-10-22",
+    "summary": "It’s that time of year again when Daylight Saving Time starts to shift across different regions, which means some...",
+    "url": "https://app.getguru.com/card/i7dqMgyT/22OCT2025-Clocks-Changing-Soon-",
+    "tag": "Operations"
+  },
+   {
+    "title": "JDI Knowledge Base "Guru"",
+    "date": "2025-10-30",
+    "summary": "Just a quick reminder that Guru, our new company knowledge base for all policies, processes, and how tos, is now live!...",
+    "url": "https://app.getguru.com/card/Tjx4MeLc/30OCT2025-JDI-Knowledge-Base-Guru",
+    "tag": "Tools"
+  },
+   {
+    "title": "New Legal Request Form Is Live!",
+    "date": "2025-10-30",
+    "summary": "Hi Team - We have officially launched our new Legal Request Form! This updated form consolidates all...",
+    "url": "https://app.getguru.com/card/cBqkKMki/30OCT2025-New-Legal-Request-Form-Is-Live",
+    "tag": "Form"
+  },
+ {
+    "title": "Launch of JDI 360° Performance Evaluation Pilot",
+    "date": "2025-11-07",
+    "summary": "Hi everyone - As part of our continued focus on professional growth, collaboration, and building a strong feedback...",
+    "url": "https://app.getguru.com/card/i7dqMoRT/7NOV2025-Launch-of-JDI-360-Performance-Evaluation-Pilot",
     "tag": "HR"
+  },
+   {
+    "title": "JDI AI Responsible Use Policy",
+    "date": "2025-11-07",
+    "summary": "The 
+JDI AI Use and Responsibility Policy is now live and effective November 7, 2025. This policy sets clear...",
+    "url": "https://app.getguru.com/card/Tdxjy5pc/7NOV2025-JDI-AI-Responsible-Use-Policy",
+    "tag": "Policy"
+  },
+   {
+    "title": "JDI Received Formal CMMC Level 1 Certification",
+    "date": "2025-11-14",
+    "summary": "We are pleased to announce that JDI has received formal CMMC Level 1 certification. This is an important milestone...",
+    "url": "https://app.getguru.com/card/c7dEejqi/14NOV2025-JDI-Received-Formal-CMMC-Level-1-Certification",
+    "tag": "Certifications"
+  },
+   {
+    "title": "Reminder – Submit Your JDI 360° Performance Evaluations",
+    "date": "2025-10-20",
+    "summary": "Just a friendly reminder to complete your JDI 360° Performance Evaluation if you haven’t done so yet...",
+    "url": "https://app.getguru.com/card/T6dERj8c/14NOV2025-Reminder-Submit-Your-JDI-360-Performance-Evaluations",
+    "tag": "HR"
+  },
+   {
+    "title": "CodeTwo Company-Wide Rollout",
+    "date": "2025-11-17",
+    "summary": "We’re standardizing JDI email signatures with CodeTwo so every Outlook email is clean, consistent, and on brand...",
+    "url": "https://app.getguru.com/card/cx85xo7i/-17NOV2025-CodeTwo-CompanyWide-Rollout",
+    "tag": "Tools"
   }
 ]
