@@ -47,5 +47,12 @@
     "photo": "",
     "date": "2025-11-25",
     "department": "Sales"
+  },
+   {
+    "name": "Sales Department",
+    "message": "<b>Patrick Becker, Stephanie Gaskins, Elizabeth Herrell, and Mike Eyre:</b> Our sales organization and US-based team met for an offsite in Virginia Beach to align on wins, sharpen our processes, and lock in strategy heading into 2026. Their initiative, planning, and leadership made the event a huge success, bringing people together, strengthening our culture, and building momentum for the year ahead.",
+    "photo": "",
+    "date": "2025-11-25",
+    "department": "Sales"
   }
 ]
