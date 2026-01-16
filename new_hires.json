@@ -38,5 +38,13 @@
     "start_date": "2025-11-24",
     "photo": "",
     "intro": "Alay Bangash is JDI’s Dynamics 365 CRM Developer, bringing 8 years of experience designing, customizing, and integrating Dynamics 365 solutions across Sales, Service, and Marketing. He plays a key role in guiding JDI’s migration to Dynamics 365 CRM, modernizing workflows, improving data quality, and building a scalable, insight-driven CRM platform that supports our long-term growth."
+  },
+  {
+    "name": "Jason Kovan",
+    "role": "General Counsel",
+    "department": "Legal",
+    "start_date": "2026-1-1",
+    "photo": "https://jdi-it.github.io/Guru/images/jason-k.png",
+    "intro": "Jason Kovan is JDI’s General Counsel, bringing deep experience in tax law, accounting, and international business. He leads JDI’s legal function as we scale, providing oversight across corporate, regulatory, and international matters to support the company’s continued growth and increasingly complex operations."
   }
 ]
