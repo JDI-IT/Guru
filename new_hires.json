@@ -46,5 +46,13 @@
     "start_date": "2026-1-1",
     "photo": "https://jdi-it.github.io/Guru/images/jason-k.png",
     "intro": "Jason Kovan is JDI’s General Counsel, bringing deep experience in tax law, accounting, and international business. He leads JDI’s legal function as we scale, providing oversight across corporate, regulatory, and international matters to support the company’s continued growth and increasingly complex operations."
+  },
+  {
+    "name": "Nathaniel Muhler",
+    "role": "Architect",
+    "department": "Enklave",
+    "start_date": "2026-1-1",
+    "photo": "https://jdi-it.github.io/Guru/images/nathaniel-m.png",
+    "intro": "Nathaniel Muhler is JDI’s Lead Architect, bringing deep experience leading architectural strategy from concept through execution. He supports JDI’s growth by shaping and scaling SCIF manufacturing capabilities for Enklave, while also contributing to modular and container-based design efforts across the organization."
   }
 ]
