@@ -54,5 +54,13 @@
     "start_date": "2026-1-1",
     "photo": "https://jdi-it.github.io/Guru/images/nathaniel-m.png",
     "intro": "Nathaniel Muhler is JDI’s Lead Architect, bringing deep experience leading architectural strategy from concept through execution. He supports JDI’s growth by shaping and scaling SCIF manufacturing capabilities for Enklave, while also contributing to modular and container-based design efforts across the organization."
+  },
+  {
+    "name": "Dhara Shah",
+    "role": "Financial Controller",
+    "department": "Finance",
+    "start_date": "2025-11-1",
+    "photo": "https://jdi-it.github.io/Guru/images/dhara-s.png",
+    "intro": "Dhara Shah is JDI’s Financial Controller, bringing strong experience in financial reporting and accounting oversight. She supports JDI’s operations by ensuring accurate financial statements, overseeing Accounts Payable, and aligning accounting data with key financial inputs and internal controls across the organization."
   }
 ]
