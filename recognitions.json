@@ -89,5 +89,26 @@
     "photo": "",
     "date": "2025-12-20",
     "department": "Business Administration"
+  },
+    {
+    "name": "Proposal Department",
+    "message": "<b>Liz, Manoj, and the Proposal Team:</b> Victory under pressure. When USAID collapsed and their pipeline disappeared, this team fought back, securing a new pipeline with $5.8M in wins and closing on more. When some wondered what the proposal team would do without USAID, Liz and Manoj answered through action — their team will continue to win.",
+    "photo": "",
+    "date": "2026-01-01",
+    "department": "Proposal"
+  },
+    {
+    "name": "Michael Eyre",
+    "message": "<b>Mike</b> (Shelters + Sales): Kept the shelters program moving through constant uncertainty and challenge. <b>Mike</b> managed this while simultaneously building out a sales department that’s already setting us up for another record year in 2026.",
+    "photo": "https://jdi-it.github.io/Guru/images/michael-e.png",
+    "date": "2026-01-01",
+    "department": "Revenue Generation"
+  },
+      {
+    "name": "Viktor Irchak",
+    "message": "<b>Viktor</b> (Shelters + Sales): Kept the shelters program moving through constant uncertainty and challenge. <b>Viktor</b> accomplished this while being bombed with his colleagues on an almost nightly basis. These Jedi are steady, aligned, and indispensable.",
+    "photo": "https://jdi-it.github.io/Guru/images/viktor-i.png",
+    "date": "2026-01-01",
+    "department": "Project Management"
   }
 ]
