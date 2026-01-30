@@ -110,5 +110,26 @@
     "photo": "https://jdi-it.github.io/Guru/images/viktor-i.png",
     "date": "2026-01-01",
     "department": "Project Management"
+  },
+   {
+    "name": "Patrick Becker",
+    "message": "<b>Pat</b>: The embodiment of a disciplined leader. He’s one of the few people rarely heard from day-to-day because he executes so effectively that things don’t escalate — they just get done. He has been professionalizing our sales organization, mentoring the next generation of hunter killers, and building a machine that feeds this company. His team is why we stand today with a >$100M pipeline and are positioned to scale into new territories and new primes.",
+    "photo": "https://jdi-it.github.io/Guru/images/patrick-b.png",
+    "date": "2026-01-01",
+    "department": "Sales"
+  },
+  {
+    "name": "Hilary Warren",
+    "message": "<b>Hilary:</b> Rapidly rising in the sales organization due to her experience and leadership ability. She is stepping into an expanded role heading into 2026 leading our shelter category (Enklave). Her leadership is positioning Enklave to become a profit machine for this organization.",
+    "photo": "https://jdi-it.github.io/Guru/images/hilary-w.png",
+    "date": "2026-01-01",
+    "department": "Enklave"
+  },
+    {
+    "name": "Faizan Peshimam",
+    "message": "<b>Faizan:</b> Built the legal admin engine that keeps agreements flowing smoothly at scale. <b>Faizan’s</b> contributions produce efficiency that compounds into strategic advantage by freeing up our strategic bandwidth.",
+    "photo": "https://jdi-it.github.io/Guru/images/faizan-p.png",
+    "date": "2026-01-01",
+    "department": "Legal"
   }
 ]
