@@ -15,13 +15,21 @@
     "photo": "https://jdi-it.github.io/Guru/images/natalia-s.png",
     "intro": "Natalia will be working closely with our in-house accountant in Ukraine and global teams on accounting, financial reporting, and compliance processes."
   },
-  {
+   {
     "name": "Iryna Hana",
     "role": "Chief Accountant",
     "department": "Finance",
     "start_date": "2025-11-03",
     "photo": "https://jdi-it.github.io/Guru/images/iryna-h.png",
     "intro": "Iryna Hana is JDI’s Ukraine Chief Accountant, bringing over 18 years of experience in accounting and financial management. She oversees our Ukraine-based financial operations, supports accurate and compliant reporting, and helps ensure our accounting processes run smoothly behind the scenes."
+  },
+  {
+    "name": "Corey Anderson",
+    "role": "Solutions Engineer",
+    "department": "Sales",
+    "start_date": "2026-02-09",
+    "photo": "https://jdi-it.github.io/Guru/images/corey-a.png",
+    "intro": "Corey joins JDI from a prime vendor, where he served as the Army FMS Inside Representative, bringing valuable experience and insight with him. Corey will work alongside Steven Snakebite Kendrick to manage the CONUS – DoD & DHS Sales territory."
   },
   {
     "name": "Jason Medero",
