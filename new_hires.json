@@ -24,14 +24,6 @@
     "intro": "Iryna Hana is JDI’s Ukraine Chief Accountant, bringing over 18 years of experience in accounting and financial management. She oversees our Ukraine-based financial operations, supports accurate and compliant reporting, and helps ensure our accounting processes run smoothly behind the scenes."
   },
   {
-    "name": "Corey Anderson",
-    "role": "Solutions Engineer",
-    "department": "Sales",
-    "start_date": "2026-02-09",
-    "photo": "https://jdi-it.github.io/Guru/images/corey-a.png",
-    "intro": "Corey joins JDI from a prime vendor, where he served as the Army FMS Inside Representative, bringing valuable experience and insight with him. Corey will work alongside Steven Snakebite Kendrick to manage the CONUS – DoD & DHS Sales territory."
-  },
-  {
     "name": "Jason Medero",
     "role": "Head of IT and Cybersecurity Officer",
     "department": "IT",
@@ -70,5 +62,13 @@
     "start_date": "2025-11-1",
     "photo": "https://jdi-it.github.io/Guru/images/dhara-s.png",
     "intro": "Dhara Shah is JDI’s Financial Controller, bringing strong experience in financial reporting and accounting oversight. She supports JDI’s operations by ensuring accurate financial statements, overseeing Accounts Payable, and aligning accounting data with key financial inputs and internal controls across the organization."
+  },
+    {
+    "name": "Corey Anderson",
+    "role": "Solutions Engineer",
+    "department": "Sales",
+    "start_date": "2026-02-09",
+    "photo": "https://jdi-it.github.io/Guru/images/corey-a.png",
+    "intro": "Corey joins JDI from a prime vendor, where he served as the Army FMS Inside Representative, bringing valuable experience and insight with him. Corey will work alongside Steven Snakebite Kendrick to manage the CONUS – DoD & DHS Sales territory."
   }
 ]
