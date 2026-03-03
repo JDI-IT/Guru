@@ -131,5 +131,12 @@
     "photo": "https://jdi-it.github.io/Guru/images/faizan-p.png",
     "date": "2026-01-01",
     "department": "Legal"
+  },
+    {
+    "name": "Zoia Styhar",
+    "message": "<b>Zoia:</b> An inventory check by our new warehouse provider in Poland revealed that 11 sets of our solar lights - roughly $95,000 worth of our product - were missing.",
+    "photo": "https://jdi-it.github.io/Guru/images/zoia-s.png",
+    "date": "2026-02-14",
+    "department": "Logistics"
   }
 ]
