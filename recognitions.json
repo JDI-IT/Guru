@@ -138,18 +138,18 @@
     "photo": "https://jdi-it.github.io/Guru/images/zoia-s.png",
     "date": "2026-02-14",
     "department": "Logistics"
-  },
-    {
-    "name": "Vlad Konov",
-    "message": "<b>Vlad:</b> Last week, they prepared and delivered a complex, high-consequence presentation on our Unmanned Systems work in Ukraine.",
-    "photo": "https://jdi-it.github.io/Guru/images/vlad-k.png",
-    "date": "2026-03-07",
-    "department": "Unmanned Systems"
-  },
+  }
     {
     "name": "Jordan Krulik",
     "message": "<b>Jordan:</b> Last week, they prepared and delivered a complex, high-consequence presentation on our Unmanned Systems work in Ukraine.",
     "photo": "https://jdi-it.github.io/Guru/images/jordan-k.png",
+    "date": "2026-03-07",
+    "department": "Unmanned Systems"
+  },
+    {
+    "name": "Vlad Konov",
+    "message": "<b>Vlad:</b> Last week, they prepared and delivered a complex, high-consequence presentation on our Unmanned Systems work in Ukraine. The audience unexpectedly included more than 120 companies and several minister-level officials from the highest levels of the South Korean government.",
+    "photo": "https://jdi-it.github.io/Guru/images/vlad-k.png",
     "date": "2026-03-07",
     "department": "Unmanned Systems"
   }
