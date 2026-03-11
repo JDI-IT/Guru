@@ -7,21 +7,20 @@
 
 <style>
   :root{
-    --page-bg:#0b0c0f;      /* dark page */
-    --card-bg:#fff;         /* white cards */
+    --page-bg:#0b0c0f;
+    --card-bg:#fff;
     --text:#171717;
     --muted:#5f6368;
     --ring:#e5e7eb;
     --accent:#111827;
-    --brand:#111827;        /* button color */
+    --brand:#111827;
     --radius:16px;
     --shadow:0 12px 28px rgba(0,0,0,.20);
 
-    /* viewport sizing for the “carousel-like” scroller */
-    --rows: 2;              /* number of visible cards */
-    --card-h: 120px;        /* card height (content area) */
-    --gap: 14px;            /* gap between cards */
-    --pad: 8px;             /* top/bottom padding in scroller */
+    --rows: 3;              /* now show 3 visible cards */
+    --card-h: 120px;
+    --gap: 14px;
+    --pad: 8px;
     --scroller-h: calc(var(--rows) * var(--card-h) + (var(--rows) - 1)*var(--gap) + var(--pad)*2);
   }
 
@@ -35,7 +34,6 @@
   .wrap{ max-width:100%; padding:8px; }
   .inner{ max-width:920px; margin:0 auto; }
 
-  /* Search bar only (no title) */
   .bar{
     display:flex; justify-content:flex-end; align-items:center; gap:8px;
     margin:6px 0 8px;
@@ -45,7 +43,6 @@
     padding:10px 12px; font-size:14px; min-width:240px;
   }
 
-  /* Scroller showing exactly N cards with snap */
   .scroller{
     height: var(--scroller-h);
     overflow-y: auto;
@@ -55,7 +52,6 @@
     display: grid;
     gap: var(--gap);
   }
-  /* keep a subtle thin scrollbar */
   .scroller::-webkit-scrollbar{ width:8px }
   .scroller::-webkit-scrollbar-thumb{ background:#2a2b2f; border-radius:999px }
   .scroller{ scrollbar-width:thin; scrollbar-color:#2a2b2f transparent }
@@ -96,7 +92,7 @@
   .empty{ color:#fff; opacity:.85; text-align:center; padding:24px 0 }
 
   @media (max-width:680px){
-    :root{ --card-h: 140px; }     /* a bit taller cards on mobile */
+    :root{ --card-h: 140px; }
     .card{ grid-template-columns:1fr; }
     .cta{ justify-self:stretch }
     .btn{ width:100%; justify-content:center }
@@ -125,15 +121,11 @@
   fetch('announcements.json?' + cacheBuster, { cache: 'no-store' })
     .then(r => { if(!r.ok) throw new Error('announcements.json not found'); return r.json(); })
     .then(items => {
-      // Date window: last 1 month (inclusive) up to today (no future)
       const now = stripTime(new Date());
       const oneMonthAgo = stripTime(addMonths(now, -1));
 
-      all = (items || [])
-        .filter(x => {
-          const d = parseISO(x.date);
-          return d && d >= oneMonthAgo && d <= now;   // 👈 keep last 1 month only; hide future
-        })
+      // 1. Remove future announcements
+      const validItems = (items || [])
         .map(x => ({
           title: String(x.title || '').trim(),
           date: parseISO(x.date),
@@ -142,7 +134,19 @@
           url: String(x.url || '#').trim(),
           tag: String(x.tag || '').trim()
         }))
+        .filter(x => x.date && x.date <= now)
         .sort((a,b) => (b.date?.getTime()||0) - (a.date?.getTime()||0));
+
+      // 2. Prefer last 1 month
+      const recentItems = validItems.filter(x => x.date >= oneMonthAgo);
+
+      // 3. If fewer than 3, fill with older items
+      if (recentItems.length >= 3) {
+        all = recentItems;
+      } else {
+        const olderItems = validItems.filter(x => x.date < oneMonthAgo);
+        all = [...recentItems, ...olderItems];
+      }
 
       filtered = all.slice();
       render();
@@ -154,8 +158,11 @@
     });
 
   function render(){
-    emptyEl.style.display = filtered.length ? 'none' : 'block';
-    scroller.innerHTML = filtered.map(cardHtml).join('');
+    // only show top 3 after filtering/search
+    const visible = filtered.slice(0, 3);
+
+    emptyEl.style.display = visible.length ? 'none' : 'block';
+    scroller.innerHTML = visible.map(cardHtml).join('');
   }
 
   function cardHtml(x){
@@ -175,25 +182,33 @@
     `;
   }
 
-  // Helpers
-  function esc(s){ return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;'); }
+  function esc(s){
+    return String(s)
+      .replaceAll('&','&amp;')
+      .replaceAll('<','&lt;')
+      .replaceAll('>','&gt;')
+      .replaceAll('"','&quot;')
+      .replaceAll("'",'&#39;');
+  }
+
   function parseISO(v){
     if(!v) return null;
-    const d = new Date(v + 'T00:00:00'); // local midnight to avoid TZ drift
+    const d = new Date(v + 'T00:00:00');
     return isNaN(d.getTime()) ? null : stripTime(d);
   }
+
   function stripTime(d){
     const t = new Date(d);
     t.setHours(0,0,0,0);
     return t;
   }
+
   function addMonths(d, n){
     const t = new Date(d);
     t.setMonth(t.getMonth() + n);
     return t;
   }
 
-  // search
   q.addEventListener('input', () => {
     const term = q.value.trim().toLowerCase();
     filtered = !term ? all.slice() : all.filter(x =>
