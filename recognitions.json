@@ -152,5 +152,19 @@
     "photo": "https://jdi-it.github.io/Guru/images/vlad-k.png",
     "date": "2026-03-07",
     "department": "Unmanned Systems"
+  },
+    {
+    "name": "Viktor Irchak",
+    "message": "<b>Viktor:</b> Quick shoutout to @Viktor Irchak and @Ihor Kazmin.  Thank you both, very much, for your efforts to support today's F-16 Shelters meeting hosted out of the Kyiv office.I know at times it was tense and heated, and there were a large number of stakeholders in office and on virtually, but you two stayed composed and navigated the conversation and interpreting smoothly, not missing a beat!  Nice work.",
+    "photo": "https://jdi-it.github.io/Guru/images/viktor-i.png",
+    "date": "2026-03-12",
+    "department": "Project Management"
+  },
+    {
+    "name": "Ihor Kazmin",
+    "message": "<b>Viktor:</b> Quick shoutout to @Viktor Irchak and @Ihor Kazmin.  Thank you both, very much, for your efforts to support today's F-16 Shelters meeting hosted out of the Kyiv office.I know at times it was tense and heated, and there were a large number of stakeholders in office and on virtually, but you two stayed composed and navigated the conversation and interpreting smoothly, not missing a beat!  Nice work.",
+    "photo": "https://jdi-it.github.io/Guru/images/ihor-k.png",
+    "date": "2026-03-12",
+    "department": "Project Management"
   }
 ]
