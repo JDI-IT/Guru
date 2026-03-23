@@ -78,5 +78,13 @@
     "start_date": "2026-03-18",
     "photo": "https://jdi-it.github.io/Guru/images/maria-m.png",
     "intro": "Mariia Medlovska is JDI’s Communications Specialist, bringing over 9 years of experience in strategic communications, media relations, and brand development. She supports JDI’s growth by leading communication strategies, strengthening media presence, and driving impactful storytelling across projects and initiatives."
+  },
+    {
+    "name": "Roman Koval",
+    "role": "Hardware Integration Engineer",
+    "department": "Unmanned Systems",
+    "start_date": "2026-03-18",
+    "photo": "https://jdi-it.github.io/Guru/images/roman-k.png",
+    "intro": "Roman Koval is an Unmanned Systems Hardware Integration Engineer, bringing over 8 years of robotics and programming experience paired with strong engineering leadership. He plays a key role in advancing hardware reliability and processes, helping the team build smarter and scale more efficiently."
   }
 ]
