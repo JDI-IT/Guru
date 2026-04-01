@@ -1,3 +1,6 @@
 [
-  "📅 Mar 3 — 🏅 Darin Heltemes ​ — 1 Year"
+  { "name": "Darin Heltemes", "date": "03-03", "years": 1, "emoji": "🏅" },
+  { "name": "Hammad Naeem", "date": "04-02", "years": 1, "emoji": "🎉" },
+  { "name": "Patrick Becker", "date": "04-07", "years": 1, "emoji": "💼" },
+  { "name": "Elizabeth Herrell", "date": "04-14", "years": 1, "emoji": "🏅" }
 ]
