@@ -35,14 +35,13 @@
     }
 
     .inner{
-      max-width:600px;      /* keep 25% narrower max cap */
+      max-width:600px;
       margin:0 auto;
     }
 
-    /* Title */
     .carousel-title{
       color:var(--title);
-      font-size:16px;        /* reduced size */
+      font-size:16px;
       font-weight:700;
       margin:0 0 8px;
       line-height:1.35;
@@ -50,20 +49,18 @@
     .carousel-title span{
       display:block;
       color:#444;
-      font-size:12px;        /* reduced size */
+      font-size:12px;
       font-weight:400;
     }
 
-    /* Swiper Container */
     .swiper{
       width:100%;
-      height:120px;          /* fixed compact height */
+      height:120px;
       padding:0;
       position:relative;
       overflow:hidden;
     }
 
-    /* Slides */
     .swiper-slide{
       height:100%;
       background:var(--card-bg);
@@ -88,12 +85,12 @@
       user-select:none;
     }
 
-    /* Arrows */
     .swiper-button-prev,
     .swiper-button-next{
       left:50%;
       transform:translateX(-50%);
-      width:12px; height:12px;
+      width:12px;
+      height:12px;
       color:var(--arrow);
       background:rgba(255,255,255,.10);
       border:1px solid rgba(255,255,255,.35);
@@ -104,7 +101,6 @@
     .swiper-button-prev:after,
     .swiper-button-next:after{ font-size:14px; }
 
-    /* Pagination */
     .swiper-pagination{ right:6px !important; }
     .swiper-pagination-bullet{ background:#000; opacity:.35; }
     .swiper-pagination-bullet-active{ opacity:1; }
@@ -135,32 +131,63 @@
     </div>
   </div>
 
-  <!-- Swiper JS -->
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
   <script>
     const cacheBuster = 'ts=' + Date.now();
 
-    // ⚠️ Now pulling from birthday.json (renamed from messages.json)
     fetch('birthday.json?' + cacheBuster, { cache: 'no-store' })
-      .then(r => { if(!r.ok) throw new Error('birthday.json not found'); return r.json(); })
-      .then(messages => {
+      .then(r => {
+        if (!r.ok) throw new Error('birthday.json not found');
+        return r.json();
+      })
+      .then(items => {
         const wrapper = document.getElementById('slides');
+        const now = new Date();
+        const currentMonth = now.getMonth() + 1;
 
-        messages.forEach(text => {
+        const monthNames = [
+          "January", "February", "March", "April", "May", "June",
+          "July", "August", "September", "October", "November", "December"
+        ];
+
+        const thisMonthBirthdays = (items || [])
+          .filter(item => {
+            if (!item.date) return false;
+            const [month] = item.date.split('-');
+            return parseInt(month, 10) === currentMonth;
+          })
+          .sort((a, b) => {
+            const dayA = parseInt(a.date.split('-')[1], 10);
+            const dayB = parseInt(b.date.split('-')[1], 10);
+            return dayA - dayB;
+          });
+
+        if (!thisMonthBirthdays.length) {
           const slide = document.createElement('div');
           slide.className = 'swiper-slide';
-          const safeText = escapeHtml(text).replaceAll('\\n','<br>');
-          slide.innerHTML = `<div class="msg">${safeText}</div>`;
+          slide.innerHTML = `<div class="msg">🎂 No birthdays this month</div>`;
           wrapper.appendChild(slide);
-        });
+        } else {
+          thisMonthBirthdays.forEach(item => {
+            const [month, day] = item.date.split('-');
+            const monthName = monthNames[parseInt(month, 10) - 1];
+            const emojis = item.emoji ? ` ${item.emoji}` : '';
+            const text = `📅 ${monthName} ${parseInt(day, 10)} — ${emojis} ${item.name}`.replace(/\s+/g, ' ').trim();
+
+            const slide = document.createElement('div');
+            slide.className = 'swiper-slide';
+            slide.innerHTML = `<div class="msg">${escapeHtml(text)}</div>`;
+            wrapper.appendChild(slide);
+          });
+        }
 
         new Swiper('.swiper', {
           direction:'vertical',
           slidesPerView:1,
           spaceBetween:0,
           centeredSlides:false,
-          loop:true,
+          loop:thisMonthBirthdays.length > 1,
           speed:450,
           autoplay:{ delay:3000, disableOnInteraction:false },
           mousewheel:{ forceToAxis:true },
