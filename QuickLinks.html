@@ -7,32 +7,34 @@
 
   <style>
     :root{
-      --page-bg:#0b0c0f;        /* ✅ black background */
+      --page-bg:#0b0c0f;
       --card-bg:#ffffff;
       --text:#171717;
       --ring:#e5e7eb;
       --accent:#111827;
       --brand:#111827;
-      --shadow: 0 10px 24px rgba(0,0,0,.25);
+      --shadow:0 10px 24px rgba(0,0,0,.25);
       --radius:16px;
     }
 
     *{ box-sizing:border-box }
 
-    html, body{
+    html,body{
       margin:0;
-      padding:0;
       background:var(--page-bg);
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
     }
 
     .wrap{
       max-width:950px;
       margin:0 auto;
-      padding:8px;
+      padding:10px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
     }
 
-    .card{
+    .section{
       background:var(--card-bg);
       border:1px solid var(--ring);
       border-radius:var(--radius);
@@ -40,7 +42,13 @@
       padding:16px;
     }
 
-    /* grid */
+    .title{
+      font-size:16px;
+      font-weight:800;
+      color:var(--accent);
+      margin-bottom:12px;
+    }
+
     .grid{
       display:grid;
       grid-template-columns: repeat(2, 1fr);
@@ -55,7 +63,6 @@
       display:flex;
       align-items:center;
       gap:10px;
-      min-height:52px;
       padding:12px 14px;
       text-decoration:none;
       color:var(--accent);
@@ -64,23 +71,22 @@
       border:1px solid var(--ring);
       border-radius:12px;
       background:#fafafa;
-      transition:all .15s ease;
+      transition:.15s ease;
     }
 
     .item a:hover{
       background:#f4f4f5;
       transform:translateY(-1px);
-      box-shadow:0 6px 14px rgba(0,0,0,.10);
     }
 
     .icon{
-      width:28px;
-      height:28px;
+      width:26px;
+      height:26px;
       border-radius:999px;
       display:flex;
       align-items:center;
       justify-content:center;
-      font-size:14px;
+      font-size:13px;
       background:#111827;
       color:#fff;
       flex-shrink:0;
@@ -93,12 +99,12 @@
     }
 
     .view-more{
-      font-size:13px;
+      font-size:12px;
       font-weight:800;
       color:#fff;
       background:var(--brand);
       border-radius:10px;
-      padding:10px 14px;
+      padding:8px 12px;
       text-decoration:none;
     }
 
@@ -106,60 +112,56 @@
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="card">
+<div class="wrap">
 
-      <div class="grid">
-        <div class="item">
-          <a href="https://app.getguru.com/card/cjgM6RAi/Admin-Request-Form1" target="_top">
-            <span class="icon">🗂️</span>
-            Admin Request Form
-          </a>
-        </div>
-
-        <div class="item">
-          <a href="https://app.getguru.com/card/c8GGz9ji/HR-Request-Form" target="_top">
-            <span class="icon">👥</span>
-            HR Request Form
-          </a>
-        </div>
-
-        <div class="item">
-          <a href="https://app.getguru.com/card/cdG76gbi/Finance-Request-Form" target="_top">
-            <span class="icon">💰</span>
-            Finance Request Form
-          </a>
-        </div>
-
-        <div class="item">
-          <a href="https://app.getguru.com/card/iMqqrGxT/Time-Off-Request-Form" target="_top">
-            <span class="icon">🌴</span>
-            Time-Off Request Form
-          </a>
-        </div>
-
-        <div class="item">
-          <a href="https://app.getguru.com/card/cLrrXd8i/IT-Request-Form" target="_top">
-            <span class="icon">💻</span>
-            IT Request Form
-          </a>
-        </div>
-
-        <div class="item">
-          <a href="https://app.getguru.com/card/i79rKa4T/Legal-Request-Form" target="_top">
-            <span class="icon">⚖️</span>
-            Legal Request Form
-          </a>
-        </div>
-      </div>
-
-      <div class="footer">
-        <a class="view-more" href="https://app.getguru.com/page/42d56300-50f3-419e-9339-7becad1eeae6#wnQIvyAfIK02" target="_top">
-          View more →
-        </a>
-      </div>
-
+  <!-- ================= Forms ================= -->
+  <div class="section">
+    <div class="title">📄 Forms</div>
+    <div class="grid">
+      <div class="item"><a href="https://app.getguru.com/card/cjgM6RAi/Admin-Request-Form1" target="_top"><span class="icon">🗂️</span>Admin Request Form</a></div>
+      <div class="item"><a href="https://app.getguru.com/card/c8GGz9ji/HR-Request-Form" target="_top"><span class="icon">👥</span>HR Request Form</a></div>
+      <div class="item"><a href="https://app.getguru.com/card/cdG76gbi/Finance-Request-Form" target="_top"><span class="icon">💰</span>Finance Request Form</a></div>
+      <div class="item"><a href="https://app.getguru.com/card/iMqqrGxT/Time-Off-Request-Form" target="_top"><span class="icon">🌴</span>Time-Off Request Form</a></div>
+      <div class="item"><a href="https://app.getguru.com/card/cLrrXd8i/IT-Request-Form" target="_top"><span class="icon">💻</span>IT Request Form</a></div>
+      <div class="item"><a href="https://app.getguru.com/card/i79rKa4T/Legal-Request-Form" target="_top"><span class="icon">⚖️</span>Legal Request Form</a></div>
+    </div>
+    <div class="footer">
+      <a class="view-more" href="https://app.getguru.com/page/42d56300-50f3-419e-9339-7becad1eeae6" target="_top">View more →</a>
     </div>
   </div>
+
+  <!-- ================= Policies ================= -->
+  <div class="section">
+    <div class="title">📘 Policies</div>
+    <div class="grid">
+      <div class="item"><a href="https://app.getguru.com/card/cjgM6RAi/Admin-Request-Form1" target="_top"><span class="icon">📘</span>JDI W-2 Employee Handbook</a></div>
+      <div class="item"><a href="https://app.getguru.com/card/c8GGz9ji/HR-Request-Form" target="_top"><span class="icon">📘</span>Enklave W-2 Employee Handbook</a></div>
+      <div class="item"><a href="https://app.getguru.com/card/cdG76gbi/Finance-Request-Form" target="_top"><span class="icon">🕒</span>JDI Time-Off Policy</a></div>
+      <div class="item"><a href="https://app.getguru.com/card/iMqqrGxT/Time-Off-Request-Form" target="_top"><span class="icon">🎉</span>JDI Holiday Policy</a></div>
+      <div class="item"><a href="https://app.getguru.com/card/cLrrXd8i/IT-Request-Form" target="_top"><span class="icon">⚠️</span>JDI Grievance Policy</a></div>
+      <div class="item"><a href="https://app.getguru.com/card/ikXnaMnT/JDI-Invoicing-Policy" target="_top"><span class="icon">💵</span>JDI Invoicing Policy</a></div>
+    </div>
+    <div class="footer">
+      <a class="view-more" href="https://app.getguru.com/page/42d56300-50f3-419e-9339-7becad1eeae6" target="_top">View more →</a>
+    </div>
+  </div>
+
+  <!-- ================= Guides ================= -->
+  <div class="section">
+    <div class="title">📚 Guides & Processes</div>
+    <div class="grid">
+      <div class="item"><a href="https://app.getguru.com/card/c4gqnA4i/JDI-How-To-SetUp-Meeting-Background-Guideline" target="_top"><span class="icon">🎥</span>Meeting Background Guideline</a></div>
+      <div class="item"><a href="https://app.getguru.com/card/i8GrbRrT/JDI-Dashlane-FAQS" target="_top"><span class="icon">🔐</span>Dashlane FAQs</a></div>
+      <div class="item"><a href="https://app.getguru.com/card/TyKGE8rc/JDI-Guru-Essentials-Guide-FAQs" target="_top"><span class="icon">📖</span>Guru Essentials Guide</a></div>
+      <div class="item"><a href="https://app.getguru.com/card/iaXaXrjT/-JDI-Guru-Internal-Guidelines-Processes" target="_top"><span class="icon">⚙️</span>Guru Guidelines & Processes</a></div>
+      <div class="item"><a href="https://app.getguru.com/card/i7d5KdrT/JDI-Guru-Group-Collection-And-Restricted-Card-Management-Process" target="_top"><span class="icon">🗂️</span>Guru Management Process</a></div>
+      <div class="item"><a href="https://app.getguru.com/card/iBqBoBxT/JDI-Billing-Tracking-Hours-For-Hourly-Contractors-Process" target="_top"><span class="icon">📊</span>Billing & Tracking Process</a></div>
+    </div>
+    <div class="footer">
+      <a class="view-more" href="https://app.getguru.com/page/42d56300-50f3-419e-9339-7becad1eeae6#4Fs2I6SUghoV" target="_top">View more →</a>
+    </div>
+  </div>
+
+</div>
 </body>
 </html>
