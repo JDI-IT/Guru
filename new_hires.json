@@ -86,5 +86,13 @@
     "start_date": "2026-03-18",
     "photo": "https://jdi-it.github.io/Guru/images/roman-k.png",
     "intro": "Roman Koval is an Unmanned Systems Hardware Integration Engineer, bringing over 8 years of robotics and programming experience paired with strong engineering leadership. He plays a key role in advancing hardware reliability and processes, helping the team build smarter and scale more efficiently."
+  },
+    {
+    "name": "Ryan Ali",
+    "role": "Dynamics 365 Project Manager",
+    "department": "Information Technology",
+    "start_date": "2026-04-27",
+    "photo": "",
+    "intro": "Ryan brings solid experience delivering D365 and Power Platform solutions in regulated environments, including financial services and other compliance-heavy industries. He has run full implementations across project management, client management, developing integrations, and workflow optimization, which means he knows what it takes to transition from messy requirements to a seamless rollout."
   }
 ]
