@@ -94,5 +94,13 @@
     "start_date": "2026-04-27",
     "photo": "https://jdi-it.github.io/Guru/images/ryan-a.png",
     "intro": "Ryan brings solid experience delivering D365 and Power Platform solutions in regulated environments, including financial services and other compliance-heavy industries. He has run full implementations across project management, client management, developing integrations, and workflow optimization, which means he knows what it takes to transition from messy requirements to a seamless rollout."
+  },
+    {
+    "name": "John Baum",
+    "role": "Business Development Manager (SCIFs)",
+    "department": "Sales",
+    "start_date": "2026-05-04",
+    "photo": "https://jdi-it.github.io/Guru/images/john-b.png",
+    "intro": "John brings over 15 years of experience in strategic sales and business development across defense, construction, and manufacturing sectors. He has a strong track record of building revenue pipelines, closing high-value deals, and expanding customer bases through structured territory planning and client engagement. With hands-on experience in complex and SCIF-related projects, he understands how to translate customer requirements into practical, scalable solutions while driving consistent growth and maintaining strong stakeholder relationships."
   }
 ]
