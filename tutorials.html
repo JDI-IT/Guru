@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Tutorial Videos</title>
 
+<!-- Swiper CSS -->
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+
 <style>
   :root{
     --page-bg:#0b0c0f;
@@ -13,15 +16,9 @@
     --muted:#5f6368;
     --ring:#e5e7eb;
     --accent:#111827;
-    --brand:#111827;
     --radius:16px;
     --shadow:0 10px 24px rgba(0,0,0,.20);
-
-    --rows:2;
-    --card-h:220px;
-    --gap:14px;
-    --pad:8px;
-    --scroller-h:calc(var(--rows) * var(--card-h) + (var(--rows) - 1) * var(--gap) + var(--pad) * 2);
+    --arrow:#ffffff;
   }
 
   *{ box-sizing:border-box; }
@@ -43,25 +40,20 @@
     margin:0 auto;
   }
 
-  .scroller{
-    height:var(--scroller-h);
-    overflow-y:auto;
-    padding:var(--pad) 0;
-    display:grid;
-    gap:var(--gap);
-    scroll-snap-type:y mandatory;
-    scroll-behavior:smooth;
+  .swiper{
+    width:100%;
+    height:460px;
+    padding:0;
+    overflow:hidden;
   }
 
-  .scroller::-webkit-scrollbar{ width:8px; }
-  .scroller::-webkit-scrollbar-thumb{
-    background:#2a2b2f;
-    border-radius:999px;
+  .swiper-slide{
+    height:auto;
+    display:flex;
   }
 
   .video-card{
-    min-height:var(--card-h);
-    scroll-snap-align:start;
+    width:100%;
     background:var(--card-bg);
     border:1px solid var(--ring);
     border-radius:var(--radius);
@@ -100,11 +92,40 @@
     margin-top:12px;
     padding:9px 12px;
     border-radius:10px;
-    background:var(--brand);
+    background:var(--accent);
     color:#fff;
     text-decoration:none;
     font-size:13px;
     font-weight:800;
+  }
+
+  .swiper-button-prev,
+  .swiper-button-next{
+    left:50%;
+    transform:translateX(-50%);
+    color:var(--arrow);
+    width:28px;
+    height:28px;
+    background:rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.35);
+    border-radius:999px;
+  }
+
+  .swiper-button-prev{ top:8px; }
+  .swiper-button-next{ bottom:8px; }
+
+  .swiper-button-prev:after,
+  .swiper-button-next:after{
+    font-size:14px;
+  }
+
+  .swiper-pagination-bullet{
+    background:#fff;
+    opacity:.35;
+  }
+
+  .swiper-pagination-bullet-active{
+    opacity:1;
   }
 
   .empty{
@@ -115,7 +136,9 @@
   }
 
   @media (max-width:720px){
-    :root{ --card-h:300px; }
+    .swiper{
+      height:620px;
+    }
 
     .video-card{
       grid-template-columns:1fr;
@@ -129,14 +152,24 @@
   <div class="wrap">
     <div class="inner">
       <div id="empty" class="empty" style="display:none;">No tutorial videos yet.</div>
-      <div id="scroller" class="scroller"></div>
+
+      <div class="swiper" id="swiperRoot" style="display:none;">
+        <div class="swiper-wrapper" id="slides"></div>
+        <div class="swiper-button-prev" aria-label="Previous"></div>
+        <div class="swiper-button-next" aria-label="Next"></div>
+        <div class="swiper-pagination"></div>
+      </div>
     </div>
   </div>
 
+<!-- Swiper JS -->
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
 <script>
   const cacheBuster = 'ts=' + Date.now();
-  const scroller = document.getElementById('scroller');
+  const wrapper = document.getElementById('slides');
   const empty = document.getElementById('empty');
+  const swiperRoot = document.getElementById('swiperRoot');
 
   fetch('tutorials.json?' + cacheBuster, { cache:'no-store' })
     .then(r => {
@@ -149,12 +182,16 @@
         return;
       }
 
-      scroller.innerHTML = items.map(video => {
+      items.forEach(video => {
         const title = escapeHtml(video.title || 'Tutorial Video');
         const description = escapeHtml(video.description || '');
         const loom = video.loom || '#';
+        const watchLink = loom.replace('/embed/', '/share/');
 
-        return `
+        const slide = document.createElement('div');
+        slide.className = 'swiper-slide';
+
+        slide.innerHTML = `
           <article class="video-card">
             <iframe
               class="video-frame"
@@ -167,13 +204,39 @@
             <div>
               <h3 class="title">${title}</h3>
               <p class="description">${description}</p>
-              <a class="watch" href="${loom.replace('/embed/', '/share/')}" target="_blank" rel="noopener">
+              <a class="watch" href="${watchLink}" target="_blank" rel="noopener">
                 Watch in Loom →
               </a>
             </div>
           </article>
         `;
-      }).join('');
+
+        wrapper.appendChild(slide);
+      });
+
+      swiperRoot.style.display = 'block';
+
+      new Swiper('.swiper', {
+        direction:'vertical',
+        slidesPerView:2,
+        spaceBetween:14,
+        loop:items.length > 2,
+        speed:600,
+        autoplay:{
+          delay:4000,
+          disableOnInteraction:false,
+          pauseOnMouseEnter:true
+        },
+        mousewheel:{ forceToAxis:true },
+        pagination:{
+          el:'.swiper-pagination',
+          clickable:true
+        },
+        navigation:{
+          nextEl:'.swiper-button-next',
+          prevEl:'.swiper-button-prev'
+        }
+      });
     })
     .catch(err => {
       console.error(err);
