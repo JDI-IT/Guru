@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Service Anniversary Carousel (Vertical)</title>
 
-  <!-- Swiper CSS -->
   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
 
   <style>
@@ -19,6 +18,7 @@
     }
 
     * { box-sizing: border-box; }
+
     html,body{
       margin:0;
       background:var(--page-bg);
@@ -46,6 +46,7 @@
       margin:0 0 8px;
       line-height:1.35;
     }
+
     .carousel-title span{
       display:block;
       color:#444;
@@ -96,14 +97,27 @@
       border:1px solid rgba(255,255,255,.35);
       border-radius:999px;
     }
+
     .swiper-button-prev{ top:4px; }
     .swiper-button-next{ bottom:4px; }
-    .swiper-button-prev:after,
-    .swiper-button-next:after{ font-size:14px; }
 
-    .swiper-pagination{ right:6px !important; }
-    .swiper-pagination-bullet{ background:#000; opacity:.35; }
-    .swiper-pagination-bullet-active{ opacity:1; }
+    .swiper-button-prev:after,
+    .swiper-button-next:after{
+      font-size:14px;
+    }
+
+    .swiper-pagination{
+      right:6px !important;
+    }
+
+    .swiper-pagination-bullet{
+      background:#000;
+      opacity:.35;
+    }
+
+    .swiper-pagination-bullet-active{
+      opacity:1;
+    }
 
     @media (max-width:520px){
       .inner{ max-width:92%; }
@@ -153,14 +167,15 @@
 
         const thisMonthItems = (items || [])
           .filter(item => {
-            if (!item.date) return false;
-            const [month] = item.date.split('-');
-            return parseInt(month, 10) === currentMonth;
+            if (!item.hireDate) return false;
+
+            const hireDate = parseLocalDate(item.hireDate);
+            return hireDate.getMonth() + 1 === currentMonth;
           })
           .sort((a, b) => {
-            const dayA = parseInt(a.date.split('-')[1], 10);
-            const dayB = parseInt(b.date.split('-')[1], 10);
-            return dayA - dayB;
+            const dateA = parseLocalDate(a.hireDate);
+            const dateB = parseLocalDate(b.hireDate);
+            return dateA.getDate() - dateB.getDate();
           });
 
         if (!thisMonthItems.length) {
@@ -170,11 +185,16 @@
           wrapper.appendChild(slide);
         } else {
           thisMonthItems.forEach(item => {
-            const [month, day] = item.date.split('-');
-            const monthName = monthNamesShort[parseInt(month, 10) - 1];
+            const hireDate = parseLocalDate(item.hireDate);
+
+            const monthName = monthNamesShort[hireDate.getMonth()];
+            const day = hireDate.getDate();
             const emoji = item.emoji ? item.emoji : "🏅";
-            const yearLabel = item.years === 1 ? "1 Year" : `${item.years} Years`;
-            const text = `📅 ${monthName} ${parseInt(day, 10)} — ${emoji} ${item.name} — ${yearLabel}`;
+
+            const years = calculateYearsOfService(item.hireDate);
+            const yearLabel = years === 1 ? "1 Year" : `${years} Years`;
+
+            const text = `📅 ${monthName} ${day} — ${emoji} ${item.name} — ${yearLabel}`;
 
             const slide = document.createElement('div');
             slide.className = 'swiper-slide';
@@ -204,6 +224,29 @@
         slide.textContent = '⚠️ Could not load anniversary.json';
         wrapper.appendChild(slide);
       });
+
+    function parseLocalDate(dateString){
+      return new Date(dateString + 'T00:00:00');
+    }
+
+    function calculateYearsOfService(hireDateString){
+      const today = new Date();
+      const hireDate = parseLocalDate(hireDateString);
+
+      let years = today.getFullYear() - hireDate.getFullYear();
+
+      const anniversaryThisYear = new Date(
+        today.getFullYear(),
+        hireDate.getMonth(),
+        hireDate.getDate()
+      );
+
+      if (today < anniversaryThisYear) {
+        years--;
+      }
+
+      return Math.max(years, 0);
+    }
 
     function escapeHtml(str){
       return String(str)
