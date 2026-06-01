@@ -1,6 +1,74 @@
 [
-  { "name": "Darin Heltemes", "date": "03-03", "years": 1, "emoji": "🏅" },
-  { "name": "Hammad Naeem", "date": "04-02", "years": 1, "emoji": "🎉" },
-  { "name": "Patrick Becker", "date": "04-07", "years": 1, "emoji": "💼" },
-  { "name": "Elizabeth Herrell", "date": "04-14", "years": 1, "emoji": "🏅" }
+  { "name": "Aynur Musayeva", "hireDate": "2024-01-08", "emoji": "🏅" },
+  { "name": "Jason Kovan", "hireDate": "2026-01-01", "emoji": "🎉" },
+  { "name": "Nathaniel Muhler", "hireDate": "2026-01-01", "emoji": "💼" },
+  { "name": "Kateryna Prykhodko", "hireDate": "2025-01-06", "emoji": "🏅" },
+
+  { "name": "Darren Mowery", "hireDate": "2025-02-01", "emoji": "🎉" },
+  { "name": "Wesley Merson", "hireDate": "2023-02-01", "emoji": "💼" },
+  { "name": "Arlene Ariola", "hireDate": "2021-02-07", "emoji": "🏅" },
+  { "name": "Elisa Di Carlo", "hireDate": "2025-02-10", "emoji": "🎉" },
+  { "name": "Faizan Peshimam", "hireDate": "2025-02-12", "emoji": "💼" },
+  { "name": "Anastasiia Dovbysh", "hireDate": "2024-02-23", "emoji": "🏅" },
+  { "name": "Wouter Savelkoul", "hireDate": "2024-02-26", "emoji": "🎉" },
+
+  { "name": "Darin Heltemes", "hireDate": "2025-03-03", "emoji": "💼" },
+  { "name": "James Kerrick", "hireDate": "2019-03-14", "emoji": "🏅" },
+
+  { "name": "Hammad Naeem", "hireDate": "2025-04-02", "emoji": "🎉" },
+  { "name": "Patrick Becker", "hireDate": "2025-04-07", "emoji": "💼" },
+  { "name": "Elizabeth Herrell", "hireDate": "2025-04-14", "emoji": "🏅" },
+  { "name": "Ryan Ali", "hireDate": "2026-04-27", "emoji": "🎉" },
+
+  { "name": "Bojan Smiljanic", "hireDate": "2025-05-01", "emoji": "💼" },
+  { "name": "Ivy Zeng", "hireDate": "2023-05-04", "emoji": "🏅" },
+  { "name": "John Baum", "hireDate": "2026-05-04", "emoji": "🎉" },
+  { "name": "Oksana Cherniienko", "hireDate": "2025-05-06", "emoji": "💼" },
+  { "name": "Viktor Trandafir", "hireDate": "2025-05-12", "emoji": "🏅" },
+  { "name": "Kateryna Kutuzova", "hireDate": "2024-05-13", "emoji": "🎉" },
+  { "name": "Kate Sanguyo", "hireDate": "2025-05-19", "emoji": "💼" },
+  { "name": "Fazlur Khan", "hireDate": "2025-05-20", "emoji": "🏅" },
+
+  { "name": "Michael Laing", "hireDate": "2024-06-01", "emoji": "🎉" },
+  { "name": "Oleksandr Kryzhanovskyi", "hireDate": "2025-06-03", "emoji": "💼" },
+  { "name": "Michael Eyre", "hireDate": "2024-06-07", "emoji": "🏅" },
+  { "name": "Anna Hurina", "hireDate": "2023-06-12", "emoji": "🎉" },
+  { "name": "Louis Atouguia", "hireDate": "2025-06-16", "emoji": "💼" },
+  { "name": "Richard Starkey", "hireDate": "2025-06-16", "emoji": "🏅" },
+  { "name": "Jordan Krulik", "hireDate": "2024-06-18", "emoji": "🎉" },
+  { "name": "Vlad Konov", "hireDate": "2025-06-25", "emoji": "💼" },
+  { "name": "Steven Kendrick", "hireDate": "2025-06-30", "emoji": "🏅" },
+
+  { "name": "OWL Concepts LLC", "hireDate": "2025-07-07", "emoji": "🎉" },
+  { "name": "Ihor Kazmin", "hireDate": "2024-07-26", "emoji": "💼" },
+  { "name": "Alex Whitley", "hireDate": "2024-07-29", "emoji": "🏅" },
+
+  { "name": "Victor Minguez", "hireDate": "2024-08-01", "emoji": "🎉" },
+  { "name": "Zoia Styhar", "hireDate": "2024-08-12", "emoji": "💼" },
+  { "name": "Jamal Naqvi", "hireDate": "2025-08-11", "emoji": "🏅" },
+  { "name": "Viktor Irchak", "hireDate": "2024-08-15", "emoji": "🎉" },
+  { "name": "Oleksandr Kolodiuk", "hireDate": "2024-08-26", "emoji": "💼" },
+
+  { "name": "Ali Raza", "hireDate": "2023-09-07", "emoji": "🏅" },
+  { "name": "Basil Dax", "hireDate": "2025-09-04", "emoji": "🎉" },
+  { "name": "Gerald Charles", "hireDate": "2025-09-04", "emoji": "💼" },
+  { "name": "John Venter", "hireDate": "2025-09-04", "emoji": "🏅" },
+  { "name": "Jane Tungka", "hireDate": "2025-09-22", "emoji": "🎉" },
+  { "name": "Manoj Weerasekara", "hireDate": "2023-09-27", "emoji": "💼" },
+  { "name": "Stephanie Gaskins", "hireDate": "2024-09-30", "emoji": "🏅" },
+
+  { "name": "Dane Miller", "hireDate": "2024-10-09", "emoji": "🎉" },
+  { "name": "Alay Bangash", "hireDate": "2025-10-17", "emoji": "💼" },
+  { "name": "Natalia Sarnatska", "hireDate": "2025-10-20", "emoji": "🏅" },
+  { "name": "Valeriia Pavlova", "hireDate": "2025-10-20", "emoji": "🎉" },
+  { "name": "Elvira Enciso", "hireDate": "2024-10-21", "emoji": "💼" },
+  { "name": "Jeremiah Fernandez", "hireDate": "2024-10-21", "emoji": "🏅" },
+  { "name": "Lea Fernandez", "hireDate": "2024-10-21", "emoji": "🎉" },
+
+  { "name": "Dhara Shah", "hireDate": "2025-11-01", "emoji": "💼" },
+  { "name": "Iryna Hana", "hireDate": "2025-11-03", "emoji": "🏅" },
+  { "name": "Jason Medero", "hireDate": "2025-11-10", "emoji": "🎉" },
+  { "name": "Steve Peters", "hireDate": "2022-11-28", "emoji": "💼" },
+
+  { "name": "Aziz Rehman", "hireDate": "2022-12-29", "emoji": "🏅" }
 ]
