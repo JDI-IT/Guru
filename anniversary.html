@@ -233,19 +233,10 @@
       const today = new Date();
       const hireDate = parseLocalDate(hireDateString);
 
-      let years = today.getFullYear() - hireDate.getFullYear();
-
-      const anniversaryThisYear = new Date(
-        today.getFullYear(),
-        hireDate.getMonth(),
-        hireDate.getDate()
+      return Math.max(
+        today.getFullYear() - hireDate.getFullYear(),
+        0
       );
-
-      if (today < anniversaryThisYear) {
-        years--;
-      }
-
-      return Math.max(years, 0);
     }
 
     function escapeHtml(str){
