@@ -189,10 +189,38 @@
     "department": "Project Management"
   },
     {
-    "name": "Enklave Team",
-    "message": "<b>Patrick Becker, Alex Whitley, Hilary Warren, Steven Snakebite Kendrick, and Mike Eyre</b> played critical roles in Enklave's first major commercial success. From building the business unit and developing customer relationships to expanding into new markets and executing the go-to-market strategy, their efforts helped transform Enklave from a concept into a revenue-generating business. This milestone reflects disciplined teamwork, leadership, and a shared commitment to creating new opportunities for JDI.",
-    "photo": "",
+    "name": "Patrick Becker",
+    "message": "<b>Patrick:</b> @Patrick Becker enabled first contact with the customer, setting the stage for Enklave’s first major breakthrough. Pat has spent years building relationships, creating opportunities, and pushing beyond traditional constraints that limit growth. While others focus on maintaining the status quo, Pat focuses on expanding what is possible. He identified a new channel, cultivated trust with key partners, and transformed that trust into opportunity. The result is not simply a new customer, but a new pathway for growth that will continue generating value well into the future. Pat leads with action, not noise. He clears obstacles, empowers his team, and consistently demonstrates what ownership looks like. When presented with new challenges, he does not ask why they are difficult. He asks how they can be won. His leadership continues to expand our reach, diversify our business, and create momentum that benefits the entire organization.",
+    "photo": "https://jdi-it.github.io/Guru/images/patrick-b.png",
+    "date": "2026-05-22",
+    "department": "Revenue Generation"
+  },
+    {
+    "name": "Hilary Warren",
+    "message": "<b>Hilary:</b> @Hilary Warren accepted the challenge of building and leading an entirely new business unit under circumstances that would cause many leaders to hesitate. She stepped into unfamiliar territory, embraced uncertainty, and transformed a vision into an operational reality. Hilary combines deep industry expertise with a relentless commitment to learning, allowing her to navigate complex situations while bringing others along with her. The trust she built throughout her career enabled her to recruit exceptional talent and assemble a team capable of executing at a high level from day one. Her leadership style creates confidence, accountability, and momentum. While building a business unit from the ground up is difficult, building one while establishing new processes, new partnerships, and a new market presence is even harder. Hilary met every challenge with determination and composure. The success Enklave enjoys today rests on a foundation she helped create.",
+    "photo": "https://jdi-it.github.io/Guru/images/hilary-w.png",
     "date": "2026-05-22",
     "department": "Enklave"
+  },
+    {
+    "name": "Steven "Snakebite" Kendrick",
+    "message": "<b>Steven:</b> @Steven Kendrick joined JDI under circumstances that demanded resilience, independence, and an unwavering belief in what could be built. He was not handed an established territory with existing momentum. He was given the responsibility of creating one. Snakebite embraced that challenge and approached it with the determination of someone who understands that success must be earned. He invested the time to build relationships, understand customer needs, and establish credibility in a competitive market. Every opportunity required persistence, and every win required effort. Rather than focusing on obstacles, he focused on execution. His ability to create momentum where none previously existed reflects both his character and his professionalism. The growth of Enklave’s presence within new markets is a direct reflection of his willingness to take ownership, work hard, and remain committed to the mission.",
+    "photo": "https://jdi-it.github.io/Guru/images/steven-k.png",
+    "date": "2026-05-22",
+    "department": "Business Development"
+  },
+    {
+    "name": "Alex Whitley",
+    "message": "<b>Alex:</b> @Alex Whitley transform Enklave from an ambitious idea into a functioning business. Long before customers were won and revenue was generated, there were countless challenges that needed solutions, systems that needed to be built, and decisions that needed to be made. Alex embraced all of them. Entering a new industry without prior experience would discourage many people, yet Alex approached the opportunity with optimism, adaptability, and determination. He helped establish the foundation upon which Enklave would grow, securing critical resources, identifying obstacles, and helping shape the initial execution strategy. The work required patience, resilience, and the willingness to learn quickly. His efforts created the conditions necessary for future success and allowed others to build upon what he started. Many of the achievements celebrated today are possible because Alex was willing to take the first steps when the path forward was still uncertain.",
+    "photo": "https://jdi-it.github.io/Guru/images/alex-w.png",
+    "date": "2026-05-22",
+    "department": "Business Administration"
+  },
+    {
+    "name": "Mike Eyre",
+    "message": "<b>Mike:</b> @Mike Eyre has been a steady force behind Enklave’s growth from the very beginning. While others often receive recognition for visible achievements, Mike consistently focuses on enabling success behind the scenes. He remained closely connected to the work, helping teams navigate uncertainty, solve problems, and avoid costly mistakes while balancing numerous responsibilities across the organization. His attention to detail, thoughtful guidance, and willingness to support others created an environment where learning and growth could occur safely. Mike understands that leadership is not about personal recognition. It is about helping others succeed and creating conditions where teams can perform at their highest level. Throughout Enklave’s development, he provided both oversight and encouragement, ensuring progress continued while allowing others to take ownership of their responsibilities. His leadership reflects the values that define JDI and continues to strengthen the organization every day.",
+    "photo": "https://jdi-it.github.io/Guru/images/mike-e.png",
+    "date": "2026-05-22",
+    "department": "Executive"
   }
 ]
