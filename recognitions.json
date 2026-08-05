@@ -236,5 +236,19 @@
     "photo": "https://jdi-it.github.io/Guru/images/steve-p.png",
     "date": "2026-08-03",
     "department": "Executive"
+  },
+    {
+    "name": "Vlad Konov",
+    "message": "<b>Vlad:</b> Vlad Konov, Unmanned Systems’ first Chief Product Officer, built and assembled the development team that successfully designed and tested Eciton’s GPS-denied heterogeneous drone swarming platform in under a year—delivering breakthrough capabilities ahead of schedule and below cost.",
+    "photo": "https://jdi-it.github.io/Guru/images/vlad-k.png",
+    "date": "2026-08-05",
+    "department": "Unmanned Systems"
+  },
+    {
+    "name": "Roman Ferens",
+    "message": "<b>Roman:</b> Roman Ferens, Unmanned Systems’ new Engineering Team Lead, was unanimously selected by the development team to lead its technical execution, translating product vision into reality and guiding the engineering team behind Eciton’s autonomous swarming breakthrough.",
+    "photo": "https://jdi-it.github.io/Guru/images/roman-f.png",
+    "date": "2026-08-05",
+    "department": "Unmanned Systems"
   }
 ]
