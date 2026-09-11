@@ -16,14 +16,12 @@
     --radius:16px;
     --shadow:0 12px 28px rgba(0,0,0,.20);
 
-    --rows: 1;
-    --card-h: 120px;
-    --gap: 14px;
-    --pad: 8px;
-    --scroller-h: calc(var(--rows) * var(--card-h) + (var(--rows) - 1)*var(--gap) + var(--pad)*2);
+    --card-h:110px;
   }
 
-  *{ box-sizing:border-box }
+  *{
+    box-sizing:border-box;
+  }
 
   html,body{
     margin:0;
@@ -36,8 +34,8 @@
   }
 
   .wrap{
-    max-width:100%;
-    padding:8px;
+    width:100%;
+    padding:0;
   }
 
   .inner{
@@ -50,7 +48,7 @@
     justify-content:space-between;
     align-items:center;
     gap:8px;
-    margin:6px 0 8px;
+    margin:0 0 8px;
   }
 
   .title{
@@ -70,13 +68,13 @@
   }
 
   .scroller{
-    height:var(--scroller-h);
+    height:var(--card-h);
     overflow-y:auto;
-    padding:var(--pad) 0;
+    padding:0;
+    display:grid;
+    gap:0;
     scroll-snap-type:y mandatory;
     scroll-behavior:smooth;
-    display:grid;
-    gap:var(--gap);
   }
 
   .scroller::-webkit-scrollbar{
@@ -136,7 +134,7 @@
     font-size:14px;
     color:var(--text);
     margin:0;
-    line-height:1.55;
+    line-height:1.45;
   }
 
   .cta{
@@ -170,7 +168,7 @@
     color:#fff;
     opacity:.85;
     text-align:center;
-    padding:24px 0;
+    padding:16px 0;
   }
 
   @media (max-width:680px){
@@ -202,30 +200,32 @@
 
 <body>
 
-  <div class="wrap">
-    <div class="inner">
+<div class="wrap">
+  <div class="inner">
 
-      <div class="bar">
-        <h2 class="title">Calling All Jedi</h2>
-        <input
-          id="q"
-          class="search"
-          type="search"
-          placeholder="Search Calling All Jedi..."
-        />
-      </div>
+    <div class="bar">
+      <h2 class="title">☎️ Calling All Jedi</h2>
 
-      <div id="empty" class="empty" style="display:none">
-        No Calling All Jedi entries yet.
-      </div>
-
-      <div id="scroller" class="scroller"></div>
-
+      <input
+        id="q"
+        class="search"
+        type="search"
+        placeholder="Search Calling All Jedi..."
+      />
     </div>
+
+    <div id="empty" class="empty" style="display:none">
+      No Calling All Jedi entries yet.
+    </div>
+
+    <div id="scroller" class="scroller"></div>
+
   </div>
+</div>
 
 <script>
   const cacheBuster = 'ts=' + Date.now();
+
   const scroller = document.getElementById('scroller');
   const emptyEl = document.getElementById('empty');
   const q = document.getElementById('q');
@@ -234,18 +234,22 @@
   let filtered = [];
 
   fetch('calling-all-jedi.json?' + cacheBuster, { cache: 'no-store' })
+
     .then(r => {
-      if(!r.ok) {
+      if(!r.ok){
         throw new Error('calling-all-jedi.json not found');
       }
+
       return r.json();
     })
 
     .then(items => {
+
       const now = stripTime(new Date());
       const oneMonthAgo = stripTime(addMonths(now, -1));
 
       const validItems = (items || [])
+
         .map(x => ({
           title: String(x.title || '').trim(),
           date: parseISO(x.date),
@@ -254,7 +258,12 @@
           url: String(x.url || '#').trim(),
           tag: String(x.tag || '').trim()
         }))
-        .filter(x => x.date && x.date <= now)
+
+        .filter(x =>
+          x.date &&
+          x.date <= now
+        )
+
         .sort((a,b) =>
           (b.date?.getTime() || 0) -
           (a.date?.getTime() || 0)
@@ -267,11 +276,15 @@
       if(recentItems.length >= 1){
         all = recentItems;
       } else {
+
         const olderItems = validItems.filter(
           x => x.date < oneMonthAgo
         );
 
-        all = [...recentItems, ...olderItems];
+        all = [
+          ...recentItems,
+          ...olderItems
+        ];
       }
 
       filtered = all.slice();
@@ -280,9 +293,11 @@
     })
 
     .catch(err => {
+
       console.error(err);
 
       emptyEl.style.display = 'block';
+
       emptyEl.textContent =
         '⚠️ Could not load calling-all-jedi.json';
     });
@@ -290,7 +305,7 @@
 
   function render(){
 
-    const visible = filtered.slice(0, 1);
+    const visible = filtered.slice(0,1);
 
     emptyEl.style.display =
       visible.length ? 'none' : 'block';
@@ -362,7 +377,9 @@
 
   function parseISO(v){
 
-    if(!v) return null;
+    if(!v){
+      return null;
+    }
 
     const d =
       new Date(v + 'T00:00:00');
@@ -375,8 +392,7 @@
 
   function stripTime(d){
 
-    const t =
-      new Date(d);
+    const t = new Date(d);
 
     t.setHours(0,0,0,0);
 
@@ -386,8 +402,7 @@
 
   function addMonths(d,n){
 
-    const t =
-      new Date(d);
+    const t = new Date(d);
 
     t.setMonth(
       t.getMonth() + n
@@ -408,13 +423,18 @@
       !term
         ? all.slice()
         : all.filter(x =>
+
             x.title
               .toLowerCase()
-              .includes(term) ||
+              .includes(term)
+
+            ||
 
             x.summary
               .toLowerCase()
-              .includes(term) ||
+              .includes(term)
+
+            ||
 
             x.tag
               .toLowerCase()
@@ -427,7 +447,6 @@
       top:0,
       behavior:'instant'
     });
-
   });
 </script>
 
