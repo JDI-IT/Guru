@@ -118,5 +118,13 @@
     "start_date": "2026-08-24",
     "photo": "https://jdi-it.github.io/Guru/images/teresa-h.png",
     "intro": "Teresa has an impressive background with over 30 years of administrative experience and 3 years in safety compliance at a former SCIF manufacturer. Teresa brings strong organizational skills, attention to detail, and dependability to her role. She is OSHA 30 certified and takes pride in supporting a safe and productive workplace while completing projects accurately and on time."
+  },
+    {
+    "name": "Sergio Lopez",
+    "role": "Door Installer & Estimator",
+    "department": "Enklave",
+    "start_date": "2026-09-16",
+    "photo": "https://jdi-it.github.io/Guru/images/sergio-l.png",
+    "intro": "Sergio Lopez is a Construction Specialist with experience in secure facility and specialized door installation. His background includes SCIF acoustical door installation and high-security locking systems, supported by training from Lockmasters Security Institute and KABA MAS CDX-10 certification. His expertise is centered on field-based construction, physical security hardware, and secure door system installation."
   }
 ]
