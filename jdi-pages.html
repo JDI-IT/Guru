@@ -1,106 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>JDI Pages</title>
 
   <style>
-    :root{
-      --page-bg:#0b0c0f;
-      --card-bg:#ffffff;
-      --ring:#e5e7eb;
-      --accent:#111827;
-      --shadow:0 6px 14px rgba(0,0,0,.18);
-      --radius:14px;
+    * {
+      box-sizing: border-box;
     }
 
-    *{
-      box-sizing:border-box;
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background: #0b0c0f;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
     }
 
-    html,body{
-      margin:0;
-      padding:0;
-      background:var(--page-bg);
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      overflow:hidden;
+    .wrap {
+      width: 100%;
+      padding: 8px;
     }
 
-    .wrap{
-      width:100%;
-      margin:0;
-      padding:6px;
+    .section {
+      width: 100%;
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      padding: 12px;
     }
 
-    .section{
-      width:100%;
-      background:var(--card-bg);
-      border:1px solid var(--ring);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      padding:10px;
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
     }
 
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(2, minmax(0, 1fr));
-      gap:8px;
+    .item a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 54px;
+      padding: 10px 14px;
+      text-decoration: none;
+      color: #111827;
+      font-size: 14px;
+      font-weight: 700;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      background: #fafafa;
     }
 
-    .item a{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      min-height:52px;
-      padding:10px 12px;
-      text-decoration:none;
-      color:var(--accent);
-      font-size:14px;
-      font-weight:700;
-      border:1px solid var(--ring);
-      border-radius:12px;
-      background:#fafafa;
-      transition:.15s ease;
+    .item a:hover {
+      background: #f4f4f5;
     }
 
-    .item a:hover{
-      background:#f4f4f5;
-      transform:translateY(-1px);
+    .icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background: #111827;
+      color: #ffffff;
+      font-size: 14px;
     }
 
-    .icon{
-      width:28px;
-      height:28px;
-      border-radius:999px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:14px;
-      background:#111827;
-      color:#fff;
-      flex-shrink:0;
+    .directory {
+      grid-column: 1 / -1;
     }
 
-    .item:last-child{
-      grid-column:1 / -1;
-    }
-
-    .item:last-child a{
-      max-width:50%;
-    }
-
-    @media (max-width:640px){
-      .grid{
-        grid-template-columns:1fr;
+    @media (max-width: 640px) {
+      .grid {
+        grid-template-columns: 1fr;
       }
 
-      .item:last-child{
-        grid-column:auto;
-      }
-
-      .item:last-child a{
-        max-width:none;
+      .directory {
+        grid-column: auto;
       }
     }
   </style>
@@ -108,70 +87,70 @@
 
 <body>
 
-<div class="wrap">
-  <div class="section">
+  <div class="wrap">
+    <div class="section">
 
-    <div class="grid">
+      <div class="grid">
 
-      <div class="item">
-        <a
-          href="https://app.getguru.com/page/42d56300-50f3-419e-9339-7becad1eeae6"
-          target="_blank"
-          rel="noopener"
-        >
-          <span class="icon">🌐</span>
-          JDI Resource Center
-        </a>
-      </div>
+        <div class="item">
+          <a
+            href="https://app.getguru.com/page/42d56300-50f3-419e-9339-7becad1eeae6"
+            target="_blank"
+            rel="noopener"
+          >
+            <span class="icon">🌐</span>
+            <span>JDI Resource Center</span>
+          </a>
+        </div>
 
-      <div class="item">
-        <a
-          href="https://app.getguru.com/page/0b596af9-945c-47a6-a2c6-1e2b3e25a43b"
-          target="_blank"
-          rel="noopener"
-        >
-          <span class="icon">📣</span>
-          Announcements and Updates
-        </a>
-      </div>
+        <div class="item">
+          <a
+            href="https://app.getguru.com/page/0b596af9-945c-47a6-a2c6-1e2b3e25a43b"
+            target="_blank"
+            rel="noopener"
+          >
+            <span class="icon">📣</span>
+            <span>Announcements and Updates</span>
+          </a>
+        </div>
 
-      <div class="item">
-        <a
-          href="https://app.getguru.com/page/4d7c671e-a269-44ca-ac37-c4deb0cc78fa"
-          target="_blank"
-          rel="noopener"
-        >
-          <span class="icon">ℹ️</span>
-          About JDI
-        </a>
-      </div>
+        <div class="item">
+          <a
+            href="https://app.getguru.com/page/4d7c671e-a269-44ca-ac37-c4deb0cc78fa"
+            target="_blank"
+            rel="noopener"
+          >
+            <span class="icon">ℹ️</span>
+            <span>About JDI</span>
+          </a>
+        </div>
 
-      <div class="item">
-        <a
-          href="https://app.organimi.com/public/organizations/67913095420a7ccb0771d922/charts/68a8a936f16bdf390e1f4b50/chart/view?pId=ae13a2f08eff98324310f782ecf75918feb235d17fd3bdf0b5df261d89365233"
-          target="_blank"
-          rel="noopener"
-        >
-          <span class="icon">👥</span>
-          JDI Organizational Chart
-        </a>
-      </div>
+        <div class="item">
+          <a
+            href="https://app.organimi.com/public/organizations/67913095420a7ccb0771d922/charts/68a8a936f16bdf390e1f4b50/chart/view?pId=ae13a2f08eff98324310f782ecf75918feb235d17fd3bdf0b5df261d89365233"
+            target="_blank"
+            rel="noopener"
+          >
+            <span class="icon">👥</span>
+            <span>JDI Organizational Chart</span>
+          </a>
+        </div>
 
-      <div class="item">
-        <a
-          href="https://jdi-integrations-company.monday.com/boards/7422548484"
-          target="_blank"
-          rel="noopener"
-        >
-          <span class="icon">📇</span>
-          JDI Directory
-        </a>
+        <div class="item directory">
+          <a
+            href="https://jdi-integrations-company.monday.com/boards/7422548484"
+            target="_blank"
+            rel="noopener"
+          >
+            <span class="icon">📇</span>
+            <span>JDI Directory</span>
+          </a>
+        </div>
+
       </div>
 
     </div>
-
   </div>
-</div>
 
 </body>
 </html>
