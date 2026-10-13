@@ -22,78 +22,53 @@
       width: 100%;
       max-width: 950px;
       margin: 0 auto;
-      padding: 10px;
+      padding: 6px;
     }
 
     .section {
       width: 100%;
       background: #ffffff;
       border: 1px solid #e5e7eb;
-      border-radius: 16px;
-      padding: 14px;
-    }
-
-    .header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 12px;
+      border-radius: 14px;
+      padding: 10px;
     }
 
     .title {
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 800;
       color: #111827;
-    }
-
-    .view-more {
-      flex-shrink: 0;
-      display: inline-block;
-      font-size: 12px;
-      font-weight: 800;
-      color: #ffffff;
-      background: #111827;
-      border-radius: 10px;
-      padding: 8px 12px;
-      text-decoration: none;
-      transition: 0.15s ease;
-    }
-
-    .view-more:hover {
-      filter: brightness(1.08);
+      margin-bottom: 8px;
     }
 
     .grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
+      gap: 6px;
     }
 
     .item a {
       display: flex;
       align-items: center;
-      gap: 10px;
-      min-height: 54px;
-      padding: 10px 14px;
+      gap: 8px;
+      min-height: 42px;
+      padding: 7px 10px;
       text-decoration: none;
       color: #111827;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
       border: 1px solid #e5e7eb;
-      border-radius: 12px;
+      border-radius: 10px;
       background: #fafafa;
       transition: 0.15s ease;
     }
 
     .item a:hover {
       background: #f4f4f5;
-      transform: translateY(-1px);
     }
 
     .icon {
-      width: 28px;
-      height: 28px;
+      width: 24px;
+      height: 24px;
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -101,11 +76,32 @@
       flex-shrink: 0;
       background: #111827;
       color: #ffffff;
-      font-size: 14px;
+      font-size: 12px;
     }
 
     .directory {
       grid-column: 1 / -1;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 8px;
+    }
+
+    .view-more {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 800;
+      color: #ffffff;
+      background: #111827;
+      border-radius: 9px;
+      padding: 7px 11px;
+      text-decoration: none;
+    }
+
+    .view-more:hover {
+      filter: brightness(1.08);
     }
 
     @media (max-width: 640px) {
@@ -116,10 +112,6 @@
       .directory {
         grid-column: auto;
       }
-
-      .header {
-        align-items: center;
-      }
     }
   </style>
 </head>
@@ -127,30 +119,12 @@
 <body>
 
   <div class="wrap">
-
     <div class="section">
 
-      <!-- JDI Pages Header -->
-      <div class="header">
+      <div class="title">🔗 JDI Pages</div>
 
-        <div class="title">
-          🔗 JDI Pages
-        </div>
-
-        <a
-          class="view-more"
-          href="https://app.getguru.com/page/c87106c6-a1dd-459e-9500-16f9334bb525#f3B6kY9Wd3wH"
-          target="_top"
-        >
-          View more →
-        </a>
-
-      </div>
-
-      <!-- JDI Pages Links -->
       <div class="grid">
 
-        <!-- JDI Resource Center -->
         <div class="item">
           <a
             href="https://app.getguru.com/page/42d56300-50f3-419e-9339-7becad1eeae6"
@@ -162,7 +136,6 @@
           </a>
         </div>
 
-        <!-- Announcements and Updates -->
         <div class="item">
           <a
             href="https://app.getguru.com/page/0b596af9-945c-47a6-a2c6-1e2b3e25a43b"
@@ -174,7 +147,6 @@
           </a>
         </div>
 
-        <!-- About JDI -->
         <div class="item">
           <a
             href="https://app.getguru.com/page/4d7c671e-a269-44ca-ac37-c4deb0cc78fa"
@@ -186,7 +158,6 @@
           </a>
         </div>
 
-        <!-- JDI Organizational Chart -->
         <div class="item">
           <a
             href="https://app.organimi.com/public/organizations/67913095420a7ccb0771d922/charts/68a8a936f16bdf390e1f4b50/chart/view?pId=ae13a2f08eff98324310f782ecf75918feb235d17fd3bdf0b5df261d89365233"
@@ -198,7 +169,6 @@
           </a>
         </div>
 
-        <!-- JDI Directory -->
         <div class="item directory">
           <a
             href="https://jdi-integrations-company.monday.com/boards/7422548484"
@@ -212,8 +182,17 @@
 
       </div>
 
-    </div>
+      <div class="footer">
+        <a
+          class="view-more"
+          href="https://app.getguru.com/page/c87106c6-a1dd-459e-9500-16f9334bb525#f3B6kY9Wd3wH"
+          target="_top"
+        >
+          View more →
+        </a>
+      </div>
 
+    </div>
   </div>
 
 </body>
