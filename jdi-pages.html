@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>JDI Pages</title>
+
+  <style>
+    :root{
+      --page-bg:#0b0c0f;
+      --card-bg:#ffffff;
+      --text:#171717;
+      --ring:#e5e7eb;
+      --accent:#111827;
+      --brand:#111827;
+      --shadow:0 10px 24px rgba(0,0,0,.25);
+      --radius:16px;
+    }
+
+    *{
+      box-sizing:border-box;
+    }
+
+    html,body{
+      margin:0;
+      background:var(--page-bg);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    }
+
+    .wrap{
+      max-width:950px;
+      margin:0 auto;
+      padding:10px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+
+    .section{
+      background:var(--card-bg);
+      border:1px solid var(--ring);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:16px;
+    }
+
+    .title{
+      font-size:16px;
+      font-weight:800;
+      color:var(--accent);
+      margin-bottom:12px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(2, 1fr);
+      gap:12px;
+    }
+
+    @media (max-width:640px){
+      .grid{
+        grid-template-columns:1fr;
+      }
+    }
+
+    .item a{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:12px 14px;
+      text-decoration:none;
+      color:var(--accent);
+      font-size:14px;
+      font-weight:700;
+      border:1px solid var(--ring);
+      border-radius:12px;
+      background:#fafafa;
+      transition:.15s ease;
+    }
+
+    .item a:hover{
+      background:#f4f4f5;
+      transform:translateY(-1px);
+    }
+
+    .icon{
+      width:26px;
+      height:26px;
+      border-radius:999px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:13px;
+      background:#111827;
+      color:#fff;
+      flex-shrink:0;
+    }
+
+    .footer{
+      display:flex;
+      justify-content:flex-end;
+      margin-top:12px;
+    }
+
+    .view-more{
+      font-size:12px;
+      font-weight:800;
+      color:#fff;
+      background:var(--brand);
+      border-radius:10px;
+      padding:8px 12px;
+      text-decoration:none;
+    }
+
+    .view-more:hover{
+      filter:brightness(1.05);
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+  <!-- JDI Pages -->
+  <div class="section">
+
+    <div class="title">🔗 JDI Pages</div>
+
+    <div class="grid">
+
+      <!-- JDI Resource Center -->
+      <div class="item">
+        <a
+          href="https://app.getguru.com/page/42d56300-50f3-419e-9339-7becad1eeae6"
+          target="_blank"
+          rel="noopener"
+        >
+          <span class="icon">🌐</span>
+          JDI Resource Center
+        </a>
+      </div>
+
+      <!-- Announcements and Updates -->
+      <div class="item">
+        <a
+          href="https://app.getguru.com/page/0b596af9-945c-47a6-a2c6-1e2b3e25a43b"
+          target="_blank"
+          rel="noopener"
+        >
+          <span class="icon">📣</span>
+          Announcements and Updates
+        </a>
+      </div>
+
+      <!-- About JDI -->
+      <div class="item">
+        <a
+          href="https://app.getguru.com/page/4d7c671e-a269-44ca-ac37-c4deb0cc78fa"
+          target="_blank"
+          rel="noopener"
+        >
+          <span class="icon">ℹ️</span>
+          About JDI
+        </a>
+      </div>
+
+      <!-- JDI Organizational Chart -->
+      <div class="item">
+        <a
+          href="https://app.organimi.com/public/organizations/67913095420a7ccb0771d922/charts/68a8a936f16bdf390e1f4b50/chart/view?pId=ae13a2f08eff98324310f782ecf75918feb235d17fd3bdf0b5df261d89365233"
+          target="_blank"
+          rel="noopener"
+        >
+          <span class="icon">👥</span>
+          JDI Organizational Chart
+        </a>
+      </div>
+
+      <!-- JDI Directory -->
+      <div class="item">
+        <a
+          href="https://jdi-integrations-company.monday.com/boards/7422548484"
+          target="_blank"
+          rel="noopener"
+        >
+          <span class="icon">📇</span>
+          JDI Directory
+        </a>
+      </div>
+
+    </div>
+
+    <div class="footer">
+      <a
+        class="view-more"
+        href="https://app.getguru.com/page/c87106c6-a1dd-459e-9500-16f9334bb525#f3B6kY9Wd3wH"
+        target="_top"
+      >
+        Open JDI Pages →
+      </a>
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>
