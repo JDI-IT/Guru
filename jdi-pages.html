@@ -22,53 +22,54 @@
       width: 100%;
       max-width: 950px;
       margin: 0 auto;
-      padding: 6px;
+      padding: 10px;
     }
 
     .section {
       width: 100%;
       background: #ffffff;
       border: 1px solid #e5e7eb;
-      border-radius: 14px;
-      padding: 10px;
+      border-radius: 16px;
+      padding: 16px;
     }
 
     .title {
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 800;
       color: #111827;
-      margin-bottom: 8px;
+      margin-bottom: 14px;
     }
 
     .grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
 
     .item a {
       display: flex;
       align-items: center;
-      gap: 8px;
-      min-height: 42px;
-      padding: 7px 10px;
+      gap: 12px;
+      min-height: 58px;
+      padding: 12px 16px;
       text-decoration: none;
       color: #111827;
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 700;
       border: 1px solid #e5e7eb;
-      border-radius: 10px;
+      border-radius: 12px;
       background: #fafafa;
       transition: 0.15s ease;
     }
 
     .item a:hover {
       background: #f4f4f5;
+      transform: translateY(-1px);
     }
 
     .icon {
-      width: 24px;
-      height: 24px;
+      width: 30px;
+      height: 30px;
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -76,42 +77,28 @@
       flex-shrink: 0;
       background: #111827;
       color: #ffffff;
-      font-size: 12px;
-    }
-
-    .directory {
-      grid-column: 1 / -1;
+      font-size: 14px;
     }
 
     .footer {
       display: flex;
       justify-content: flex-end;
-      margin-top: 8px;
+      margin-top: 14px;
     }
 
     .view-more {
       display: inline-block;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 800;
       color: #ffffff;
       background: #111827;
-      border-radius: 9px;
-      padding: 7px 11px;
+      border-radius: 10px;
+      padding: 9px 14px;
       text-decoration: none;
     }
 
     .view-more:hover {
       filter: brightness(1.08);
-    }
-
-    @media (max-width: 640px) {
-      .grid {
-        grid-template-columns: 1fr;
-      }
-
-      .directory {
-        grid-column: auto;
-      }
     }
   </style>
 </head>
@@ -169,7 +156,7 @@
           </a>
         </div>
 
-        <div class="item directory">
+        <div class="item">
           <a
             href="https://jdi-integrations-company.monday.com/boards/7422548484"
             target="_blank"
