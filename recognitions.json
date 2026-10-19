@@ -250,5 +250,40 @@
     "photo": "https://jdi-it.github.io/Guru/images/roman-f.png",
     "date": "2026-08-05",
     "department": "Unmanned Systems"
+  },
+    {
+    "name": "Lea Fernandez",
+    "message": "<b>Lea:</b> Lea Fernandez, Lea has been handling a massive workload across multiple urgent priorities without missing a beat.",
+    "photo": "https://jdi-it.github.io/Guru/images/Lea-f.png",
+    "date": "2026-10-17",
+    "department": "Administrative Department"
+  },
+    {
+    "name": "Arlene Ariola",
+    "message": "<b>Arlene:</b> Arlene Ariola, For her exceptional operational support, keeping timelines tight, and making sure critical administrative bottlenecks were cleared instantly.",
+    "photo": "https://jdi-it.github.io/Guru/images/Arlene-a.png",
+    "date": "2026-10-17",
+    "department": "Administrative Department"
+  },
+    {
+    "name": "Basil Dax",
+    "message": "<b>Basil:</b> Basil Dax, For keeping our operational deliverables completely on schedule, managing logistics without a hitch, and stepping up wherever the team needed extra hands.",
+    "photo": "https://jdi-it.github.io/Guru/images/Basil-d.png",
+    "date": "2026-10-17",
+    "department": "Administrative Department"
+  },
+    {
+    "name": "Ardwin Mejia",
+    "message": "<b>Ardwin:</b> Ardwin Mejia, For sharp attention to detail on tracking workflows, keeping records spotless, and ensuring urgent requests progressed without a single delay.",
+    "photo": "https://jdi-it.github.io/Guru/images/Ardwin-a.png",
+    "date": "2026-10-17",
+    "department": "Administrative Department"
+  },
+    {
+    "name": "Kate Sanguyo",
+    "message": "<b>Kate:</b> Kate Sanguyo, For her proactive assistance, keeping daily documentation organized, and ensuring smooth follow-through across all open items.",
+    "photo": "https://jdi-it.github.io/Guru/images/Kate-s.png",
+    "date": "2026-10-17",
+    "department": "Administrative Department"
   }
 ]
