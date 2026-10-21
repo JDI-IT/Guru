@@ -285,5 +285,12 @@
     "photo": "https://jdi-it.github.io/Guru/images/kate-s.png",
     "date": "2026-10-17",
     "department": "Administrative Department"
+  },
+    {
+    "name": "Enklave Team",
+    "message": "<b>Enklave Team:</b> I want to recognize the incredible work happening at Enklave. Long days. Late nights. Weekends. Our team has been working around the clock to transform our facility.",
+    "photo": "",
+    "date": "2026-10-21",
+    "department": "Executive Department"
   }
 ]
