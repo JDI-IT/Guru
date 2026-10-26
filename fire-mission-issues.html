@@ -189,7 +189,7 @@
 
   let all = [], filtered = [];
 
-  fetch('fire-missions.json?' + cacheBuster, { cache:'no-store' })
+  fetch('fire-mission-issues.json?' + cacheBuster, { cache:'no-store' })
     .then(r => {
       if(!r.ok) throw new Error('fire-missions.json not found');
       return r.json();
