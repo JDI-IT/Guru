@@ -149,6 +149,22 @@
     "department": "Sales Operations",
     "start_date": "2026-10-19",
     "photo": "https://jdi-it.github.io/Guru/images/packer-b.png",
-    "intro": " Packer brings a unique perspective from his experience as an end user to his career as a TLS Prime Sales professional. His background and expertise position him to hit the ground running and make an immediate impact as we continue to grow our presence across EMEA."
+    "intro": "Packer brings a unique perspective from his experience as an end user to his career as a TLS Prime Sales professional. His background and expertise position him to hit the ground running and make an immediate impact as we continue to grow our presence across EMEA."
+  },
+    {
+    "name": "Matthew Liden",
+    "role": "Carpenter",
+    "department": "Enklave",
+    "start_date": "2026-10-26",
+    "photo": "",
+    "intro": "Matthew brings 10 years of construction experience to Enklave, along with four years of service in the U.S. Navy and a background in teaching. He has completed OSHA 10 training and has experience in project management, fabrication, flooring, and painting. Matthew looks forward to contributing his building experience while learning new skills and techniques with the Enklave team."
+  },
+    {
+    "name": "Sean Lancaster",
+    "role": "Carpenter",
+    "department": "Enklave",
+    "start_date": "2026-10-26",
+    "photo": "https://jdi-it.github.io/Guru/images/sean-l.png",
+    "intro": "Sean brings a background in commercial and residential construction, having earned his journeyman carpenter designation through the Associated General Contractors in California. His skills span rough and finish carpentry, cabinetry, doors, windows, and trim, with additional experience in electrical work, plumbing, and welding. Sean brings a positive attitude, leadership skills, and a commitment to teamwork to Enklave."
   }
 ]
