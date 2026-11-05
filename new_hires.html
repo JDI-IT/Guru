@@ -130,12 +130,12 @@
       .then(items => {
         if (!items || !items.length) return;
 
-        // Oldest → newest, keep only the most recent 3, so newest appears on the RIGHT
+        // Oldest → newest, keep only the most recent 6, so newest appears on the RIGHT
         const latestChrono = items
           .map(x => ({ ...x, _date: x.start_date ? new Date(x.start_date + 'T00:00:00') : null }))
           .filter(x => x._date)
           .sort((a,b) => (a._date - b._date))   // ascending
-          .slice(-3);
+          .slice(-6);
 
         renderGrid(latestChrono);
       })
