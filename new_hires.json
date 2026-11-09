@@ -190,5 +190,13 @@
     "start_date": "2026-11-09",
     "photo": "https://jdi-it.github.io/Guru/images/dylan-m.png",
     "intro": ""
+  },
+    {
+    "name": "Christopher Lewis",
+    "role": "General Laborer",
+    "department": "Enklave",
+    "start_date": "2026-11-09",
+    "photo": "",
+    "intro": ""
   }
 ]
