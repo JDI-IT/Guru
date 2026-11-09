@@ -182,5 +182,13 @@
     "start_date": "2026-11-02",
     "photo": "https://jdi-it.github.io/Guru/images/leon-w.png",
     "intro": "Leon Walts brings six years of U.S. Air Force service and two years of civilian experience supporting the Army, with a background in maintenance, material handling, shipping, and munitions inspection. He is forklift certified and has experience in hazardous materials handling and shipping and receiving. Leon looks forward to supporting Enklave’s logistics needs while developing new skills in carpentry and electrical work."
+  },
+    {
+    "name": "Dylan Macauley",
+    "role": "General Laborer",
+    "department": "Enklave",
+    "start_date": "2026-11-09",
+    "photo": "https://jdi-it.github.io/Guru/images/dylan-m.png",
+    "intro": ""
   }
 ]
