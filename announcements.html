@@ -126,16 +126,17 @@
 
       // 1. Remove future announcements
       const validItems = (items || [])
-        .map(x => ({
+        .map((x, i) => ({
           title: String(x.title || '').trim(),
           date: parseISO(x.date),
           dateText: x.date || '',
           summary: String(x.summary || x.excerpt || '').trim(),
           url: String(x.url || '#').trim(),
-          tag: String(x.tag || '').trim()
+          tag: String(x.tag || '').trim(),
+          idx: i
         }))
         .filter(x => x.date && x.date <= now)
-        .sort((a,b) => (b.date?.getTime()||0) - (a.date?.getTime()||0));
+        .sort((a,b) => (b.date - a.date) || (b.idx - a.idx));
 
       // 2. Prefer last 1 month
       const recentItems = validItems.filter(x => x.date >= oneMonthAgo);
