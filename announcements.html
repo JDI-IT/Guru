@@ -18,7 +18,7 @@
     --shadow:0 12px 28px rgba(0,0,0,.20);
 
     --rows: 3;              /* now show 3 visible cards */
-    --card-h: 120px;
+    --card-h: 150px;
     --gap: 14px;
     --pad: 8px;
     --scroller-h: calc(var(--rows) * var(--card-h) + (var(--rows) - 1)*var(--gap) + var(--pad)*2);
@@ -130,7 +130,7 @@
           title: String(x.title || '').trim(),
           date: parseISO(x.date),
           dateText: x.date || '',
-          summary: String(x.summary || '').trim(),
+          summary: String(x.summary || x.excerpt || '').trim(),
           url: String(x.url || '#').trim(),
           tag: String(x.tag || '').trim()
         }))
