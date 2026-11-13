@@ -292,5 +292,33 @@
     "photo": "",
     "date": "2026-10-21",
     "department": "Executive Department"
+  },
+  {
+    "name": "Hammad Naeem",
+    "message": "<b>Hammad:</b> Hammad Naeem owned our evidence from start to finish. He built and maintained everything in Vanta, kept our System Security Plan current through the last day, and turned around every request the assessors sent our way during the week.",
+    "photo": "https://jdi-it.github.io/Guru/images/hammad-n.png",
+    "date": "2026-11-06",
+    "department": "IT Department"
+  },
+  {
+    "name": "Jamal Naqvi",
+    "message": "<b>Jamal:</b> Jamal Naqvi did the heavy lifting on our move to our new secure Microsoft environment (GCC High), getting email, Teams, SharePoint, and our Cloud PCs into the setup the assessors reviewed. None of this would have happened without that work.",
+    "photo": "https://jdi-it.github.io/Guru/images/jamal-n.png",
+    "date": "2026-11-06",
+    "department": "IT Department"
+  },
+  {
+    "name": "Steve Peters",
+    "message": "<b>Steve:</b> Steve Peters backed this at the leadership level and made sure we had the support and decisions we needed to keep it moving.",
+    "photo": "https://jdi-it.github.io/Guru/images/steve-p.png",
+    "date": "2026-11-06",
+    "department": "Executive"
+  },
+  {
+    "name": "Aziz Rehman",
+    "message": "<b>Aziz:</b> Aziz Rehman handled the personnel side, which became a big part of the assessment. Training records, background checks, and offboarding all held up under review.",
+    "photo": "https://jdi-it.github.io/Guru/images/aziz-r.png",
+    "date": "2026-11-06",
+    "department": "Executive"
   }
 ]
